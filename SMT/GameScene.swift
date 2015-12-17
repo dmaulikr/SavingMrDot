@@ -9,10 +9,28 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    var isStarted = false
+    var isGameOver = false
+    
+    let world = SKNode()
+    let hero = MLHero()
+    let generator = MLWorldGenerator()
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let ground = SKSpriteNode(color: UIColor.greenColor(), size: CGSizeMake(self.frame.size.width, 100))
-        self.addChild(ground)
+        //let width = self.frame.size.width
+        //let height = width / 16 * 9
+        
+        self.addChild(world)
+            
+        generator.setMyWorld(world)
+        self.addChild(generator)
+        generator.populate()
+        
+        world.addChild(hero)
+        
+        
+        
 //        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
 //        myLabel.text = "Hello, World!";
 //        myLabel.fontSize = 45;
@@ -20,9 +38,61 @@ class GameScene: SKScene {
 //        self.addChild(myLabel)
     }
     
+    override func didSimulatePhysics() {
+        //let hero = self.childNodeWithName("hero") as! MLHero
+        self.centerOnNode(hero)
+        self.handleGeneration()
+        self.handleCleanUp()
+    }
+    
+    func centerOnNode(node: SKNode) {
+        let positionInScene = self.convertPoint(node.position, fromNode: node.parent!)
+        world.position = CGPointMake(world.position.x - positionInScene.x, world.position.y)
+    }
+    
+    func start() {
+        isStarted = true
+        hero.runRight()
+    }
+    
+    func clear() {
+        NSLog("Clear")
+    }
+    
+    func gameOver() {
+        NSLog("Over")
+    }
+    
+    func handleGeneration() {
+        self.world.enumerateChildNodesWithName("obstacle") { node, stop in
+            if (node.position.x < self.hero.position.x) {
+                node.name = "obstacle_cancelled"
+                self.generator.generate()
+            }
+        }
+    }
+    
+    func handleCleanUp() {
+        
+    }
+     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
+        //let hero = self.childNodeWithName("hero") as! MLHero
         
+        if (!isStarted) {
+            self.start()
+        }
+        else {
+            if (isGameOver) {
+                self.clear()
+            }
+            else {
+                hero.jump()
+            }
+        }
+        
+        /*
         for touch in touches {
             let location = touch.locationInNode(self)
             
@@ -38,6 +108,7 @@ class GameScene: SKScene {
             
             self.addChild(sprite)
         }
+        */
     }
     
     override init(size: CGSize) {
