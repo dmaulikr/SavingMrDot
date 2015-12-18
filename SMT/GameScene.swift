@@ -29,7 +29,11 @@ class GameScene: SKScene {
         
         world.addChild(hero)
         
-        
+        let pointsLabel = MLPointsLabel()
+        pointsLabel.setMyFontName("Helvetica")
+        pointsLabel.position = CGPointMake(0, 70)
+        pointsLabel.name = "pointsLabel"
+        self.addChild(pointsLabel)
         
 //        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
 //        myLabel.text = "Hello, World!";
@@ -41,6 +45,7 @@ class GameScene: SKScene {
     override func didSimulatePhysics() {
         //let hero = self.childNodeWithName("hero") as! MLHero
         self.centerOnNode(hero)
+        self.handlePoints()
         self.handleGeneration()
         self.handleCleanUp()
     }
@@ -73,7 +78,25 @@ class GameScene: SKScene {
     }
     
     func handleCleanUp() {
-        
+        self.world.enumerateChildNodesWithName("ground") { node, stop in
+            if (node.position.x < self.hero.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
+                node.removeFromParent()
+            }
+        }
+        self.world.enumerateChildNodesWithName("obstacle_cancelled") { node, stop in
+            if (node.position.x < self.hero.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
+                node.removeFromParent()
+            }
+        }
+    }
+    
+    func handlePoints() {
+        self.world.enumerateChildNodesWithName("obstacle") { node, stop in
+            if (node.position.x < self.hero.position.x) {
+                let pl = self.childNodeWithName("pointsLabel") as! MLPointsLabel
+                pl.increment()
+            }
+        }
     }
      
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

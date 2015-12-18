@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		167F47811C20DADD00A1AC47 /* MLHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167F47801C20DADD00A1AC47 /* MLHero.swift */; };
 		167F47831C22608000A1AC47 /* MLWorldGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167F47821C22608000A1AC47 /* MLWorldGenerator.swift */; };
+		167F47851C23D58100A1AC47 /* MLPointsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167F47841C23D58100A1AC47 /* MLPointsLabel.swift */; };
 		16D266CB1C153ACB00E7F84D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D266CA1C153ACB00E7F84D /* AppDelegate.swift */; };
 		16D266CD1C153ACB00E7F84D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 16D266CC1C153ACB00E7F84D /* GameScene.sks */; };
 		16D266CF1C153ACB00E7F84D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D266CE1C153ACB00E7F84D /* GameScene.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		167F47801C20DADD00A1AC47 /* MLHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLHero.swift; sourceTree = "<group>"; };
 		167F47821C22608000A1AC47 /* MLWorldGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLWorldGenerator.swift; sourceTree = "<group>"; };
+		167F47841C23D58100A1AC47 /* MLPointsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLPointsLabel.swift; sourceTree = "<group>"; };
 		16D266C71C153ACB00E7F84D /* SMT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16D266CA1C153ACB00E7F84D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16D266CC1C153ACB00E7F84D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				16D266CA1C153ACB00E7F84D /* AppDelegate.swift */,
 				16D266CC1C153ACB00E7F84D /* GameScene.sks */,
 				16D266CE1C153ACB00E7F84D /* GameScene.swift */,
+				167F47841C23D58100A1AC47 /* MLPointsLabel.swift */,
 				167F47801C20DADD00A1AC47 /* MLHero.swift */,
 				167F47821C22608000A1AC47 /* MLWorldGenerator.swift */,
 				16D266D01C153ACB00E7F84D /* GameViewController.swift */,
@@ -151,6 +154,7 @@
 			files = (
 				16D266CF1C153ACB00E7F84D /* GameScene.swift in Sources */,
 				16D266D11C153ACB00E7F84D /* GameViewController.swift in Sources */,
+				167F47851C23D58100A1AC47 /* MLPointsLabel.swift in Sources */,
 				167F47811C20DADD00A1AC47 /* MLHero.swift in Sources */,
 				16D266CB1C153ACB00E7F84D /* AppDelegate.swift in Sources */,
 				167F47831C22608000A1AC47 /* MLWorldGenerator.swift in Sources */,
