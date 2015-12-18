@@ -10,11 +10,19 @@ import UIKit
 import SpriteKit
 
 class MLHero: SKSpriteNode {
+    let heroCategory = UInt32(0x1 << 0)
+    let obstacleCategory = UInt32(0x1 << 1)
+    let groundCategory = UInt32(0x1 << 2)
+    
     init() {
         let dot_stand = SKTexture(imageNamed: "RDR_DOT_JEAN-SHORTS_STAND_R_DAY_01")
         super.init(texture: dot_stand, color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSizeMake(20, 20))
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.name = "hero"
+        
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        self.physicsBody?.categoryBitMask = heroCategory
+        self.physicsBody?.contactTestBitMask = obstacleCategory | ~groundCategory
+        
     }
     
     func runRight() {
@@ -25,6 +33,10 @@ class MLHero: SKSpriteNode {
     
     func jump() {
         self.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+    }
+    
+    func stop() {
+        self.removeAllActions()
     }
 
     required init?(coder aDecoder: NSCoder) {

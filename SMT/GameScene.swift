@@ -8,13 +8,16 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     var isStarted = false
     var isGameOver = false
+    
+    let GAME_FONT = "Helvetica"
     
     let world = SKNode()
     let hero = MLHero()
     let generator = MLWorldGenerator()
+    let pointsLabel = MLPointsLabel()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -29,9 +32,8 @@ class GameScene: SKScene {
         
         world.addChild(hero)
         
-        let pointsLabel = MLPointsLabel()
-        pointsLabel.setMyFontName("Helvetica")
-        pointsLabel.position = CGPointMake(0, 70)
+        pointsLabel.setMyFontName(GAME_FONT)
+        pointsLabel.position = CGPointMake(-150, 70)
         pointsLabel.name = "pointsLabel"
         self.addChild(pointsLabel)
         
@@ -61,11 +63,21 @@ class GameScene: SKScene {
     }
     
     func clear() {
-        NSLog("Clear")
+        print(self.frame.size.width)
+        print(self.frame.size.height)
+        let scene = GameScene.init(size: CGSizeMake(self.frame.size.width, self.frame.size.width / 16 * 9))
+        self.view?.presentScene(scene)
     }
     
     func gameOver() {
-        NSLog("Over")
+        self.isGameOver = true
+        hero.stop()
+        
+        //pointsLabel.removeFromParent()
+        let gameOverLabel = SKLabelNode(fontNamed: GAME_FONT)
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.position = CGPointMake(0, 60)
+        self.addChild(gameOverLabel)
     }
     
     func handleGeneration() {
@@ -137,6 +149,11 @@ class GameScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         self.anchorPoint = CGPointMake(0.5, 0.5)
+        self.physicsWorld.contactDelegate = self
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        self.gameOver()
     }
 
     required init?(coder aDecoder: NSCoder) {

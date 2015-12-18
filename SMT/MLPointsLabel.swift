@@ -14,7 +14,7 @@ class MLPointsLabel: SKLabelNode {
     
     override init() {
         super.init()
-        self.text = "debug"
+        self.text = "0"
         number = 0
     }
     

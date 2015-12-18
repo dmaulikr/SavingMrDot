@@ -14,6 +14,9 @@ class MLWorldGenerator: SKNode {
     var currentObstacleX = CGFloat(200)
     var world = SKNode()
     
+    let obstacleCategory = UInt32(0x1 << 1)
+    let groundCategory = UInt32(0x1 << 2)
+    
     override init() {
         super.init()
     }
@@ -62,14 +65,16 @@ class MLWorldGenerator: SKNode {
         let ground = SKSpriteNode(color: UIColor.greenColor(), size: CGSizeMake(width, 50))
         ground.position = CGPointMake(currentGroundX, -height/2 + ground.frame.size.height/2)
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.size)
+        ground.physicsBody?.categoryBitMask = groundCategory
         ground.physicsBody?.dynamic = false
         ground.name = "ground"
         world.addChild(ground)
         currentGroundX += ground.frame.size.width
         
-        let obstacle = SKSpriteNode(color: self.getRandomColor(), size: CGSizeMake(20, 70))
+        let obstacle = SKSpriteNode(color: self.getRandomColor(), size: CGSizeMake(20, 40))
         obstacle.position = CGPointMake(currentObstacleX, ground.position.y + ground.frame.size.height/2 + obstacle.frame.size.height/2)
         obstacle.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle.size)
+        obstacle.physicsBody?.categoryBitMask = obstacleCategory
         obstacle.physicsBody?.dynamic = false
         obstacle.name = "obstacle"
         world.addChild(obstacle)
