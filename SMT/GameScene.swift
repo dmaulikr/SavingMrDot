@@ -12,7 +12,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isStarted = false
     var isGameOver = false
     
-    let GAME_FONT = "Helvetica"
+    let GAME_FONT = "Helvetica" // AmericanTypewriter-Bold
     
     let world = SKNode()
     let hero = MLHero()
@@ -23,6 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Setup your scene here */
         //let width = self.frame.size.width
         //let height = width / 16 * 9
+        
+        //self.backgroundColor = SKColor.colorWithAlphaComponent()
         
         self.addChild(world)
             
@@ -37,11 +39,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pointsLabel.name = "pointsLabel"
         self.addChild(pointsLabel)
         
-//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        myLabel.text = "Hello, World!";
-//        myLabel.fontSize = 45;
-//        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-//        self.addChild(myLabel)
+        let tapToBeginLabel = SKLabelNode(fontNamed: GAME_FONT)
+        tapToBeginLabel.text = "tap to begin"
+        tapToBeginLabel.fontSize = 20
+        tapToBeginLabel.name = "tapToBeginLabel"
+        self.addChild(tapToBeginLabel)
+        self.animateWithPulse(tapToBeginLabel)
     }
     
     override func didSimulatePhysics() {
@@ -59,6 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func start() {
         isStarted = true
+        self.childNodeWithName("tapToBeginLabel")?.removeFromParent()
         hero.runRight()
     }
     
@@ -78,6 +82,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverLabel.text = "Game Over"
         gameOverLabel.position = CGPointMake(0, 60)
         self.addChild(gameOverLabel)
+        
+        let tapToResetLabel = SKLabelNode(fontNamed: GAME_FONT)
+        tapToResetLabel.text = "tap to reset"
+        tapToResetLabel.fontSize = 20
+        tapToResetLabel.name = "tapToResetLabel"
+        self.addChild(tapToResetLabel)
+        self.animateWithPulse(tapToResetLabel)
     }
     
     func handleGeneration() {
@@ -162,5 +173,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    
+    func animateWithPulse(node: SKNode) {
+        let disappear = SKAction.fadeAlphaTo(0.0, duration: 0.3)
+        let appear = SKAction.fadeAlphaTo(1.0, duration: 0.3)
+        let pulse = SKAction.sequence([disappear, appear])
+        node.runAction(SKAction.repeatActionForever(pulse))
     }
 }
