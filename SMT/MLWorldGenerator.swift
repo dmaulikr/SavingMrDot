@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 
 class MLWorldGenerator: SKNode {
+    var currentHiddenGroundX = CGFloat(0)
+    var currentBackGroundX = CGFloat(0)
     var currentGroundX = CGFloat(0)
     var currentObstacleX = CGFloat(200)
     var world = SKNode()
@@ -62,17 +64,37 @@ class MLWorldGenerator: SKNode {
     func generate() {
         let width = self.scene!.size.width
         let height = width / 16 * 9
-        let ground = SKSpriteNode(color: UIColor.greenColor(), size: CGSizeMake(width, 50))
+        
+        let hiddenground = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(width,10))
+        hiddenground.position = CGPointMake(currentHiddenGroundX, -height/2 + hiddenground.frame.size.height/2)
+        hiddenground.zPosition = -1
+        hiddenground.physicsBody = SKPhysicsBody(rectangleOfSize: hiddenground.size)
+        hiddenground.physicsBody?.categoryBitMask = groundCategory
+        hiddenground.physicsBody?.dynamic = false
+        hiddenground.name = "hiddenground"
+        world.addChild(hiddenground)
+        currentHiddenGroundX += hiddenground.frame.size.width
+        
+        let background = SKSpriteNode(imageNamed: "background_day")
+        background.size.width = height / background.size.height * background.size.width
+        background.size.height = height
+        background.position = CGPointMake(currentBackGroundX, 0)
+        background.zPosition = -0.9
+        background.name = "background"
+        world.addChild(background)
+        currentBackGroundX += background.frame.size.width
+        
+        let ground = SKSpriteNode(imageNamed: "ground_day")
+        ground.size.height = ground.size.height / 2
+        ground.size.width = ground.size.width / 2
         ground.position = CGPointMake(currentGroundX, -height/2 + ground.frame.size.height/2)
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.size)
-        ground.physicsBody?.categoryBitMask = groundCategory
-        ground.physicsBody?.dynamic = false
+        ground.zPosition = -0.5
         ground.name = "ground"
         world.addChild(ground)
         currentGroundX += ground.frame.size.width
         
         let obstacle = SKSpriteNode(color: self.getRandomColor(), size: CGSizeMake(20, 40))
-        obstacle.position = CGPointMake(currentObstacleX, ground.position.y + ground.frame.size.height/2 + obstacle.frame.size.height/2)
+        obstacle.position = CGPointMake(currentObstacleX, hiddenground.position.y + hiddenground.frame.size.height/2 + obstacle.frame.size.height/2)
         obstacle.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle.size)
         obstacle.physicsBody?.categoryBitMask = obstacleCategory
         obstacle.physicsBody?.dynamic = false

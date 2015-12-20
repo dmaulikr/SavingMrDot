@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16231FD61C26286500DDA1CD /* MyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16231FD51C26286500DDA1CD /* MyConstants.swift */; };
 		167F47811C20DADD00A1AC47 /* MLHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167F47801C20DADD00A1AC47 /* MLHero.swift */; };
 		167F47831C22608000A1AC47 /* MLWorldGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167F47821C22608000A1AC47 /* MLWorldGenerator.swift */; };
 		167F47851C23D58100A1AC47 /* MLPointsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167F47841C23D58100A1AC47 /* MLPointsLabel.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16231FD51C26286500DDA1CD /* MyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyConstants.swift; sourceTree = "<group>"; };
 		167F47801C20DADD00A1AC47 /* MLHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLHero.swift; sourceTree = "<group>"; };
 		167F47821C22608000A1AC47 /* MLWorldGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLWorldGenerator.swift; sourceTree = "<group>"; };
 		167F47841C23D58100A1AC47 /* MLPointsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLPointsLabel.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				167F47841C23D58100A1AC47 /* MLPointsLabel.swift */,
 				167F47801C20DADD00A1AC47 /* MLHero.swift */,
 				167F47821C22608000A1AC47 /* MLWorldGenerator.swift */,
+				16231FD51C26286500DDA1CD /* MyConstants.swift */,
 				16D266D01C153ACB00E7F84D /* GameViewController.swift */,
 				16D266D21C153ACB00E7F84D /* Main.storyboard */,
 				16D266D51C153ACB00E7F84D /* Assets.xcassets */,
@@ -154,6 +157,7 @@
 			files = (
 				16D266CF1C153ACB00E7F84D /* GameScene.swift in Sources */,
 				16D266D11C153ACB00E7F84D /* GameViewController.swift in Sources */,
+				16231FD61C26286500DDA1CD /* MyConstants.swift in Sources */,
 				167F47851C23D58100A1AC47 /* MLPointsLabel.swift in Sources */,
 				167F47811C20DADD00A1AC47 /* MLHero.swift in Sources */,
 				16D266CB1C153ACB00E7F84D /* AppDelegate.swift in Sources */,

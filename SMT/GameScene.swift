@@ -32,6 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(generator)
         generator.populate()
         
+        hero.position = CGPointMake(0, -10)
         world.addChild(hero)
         
         pointsLabel.setMyFontName(GAME_FONT)

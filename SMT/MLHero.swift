@@ -16,13 +16,13 @@ class MLHero: SKSpriteNode {
     
     init() {
         let dot_stand = SKTexture(imageNamed: "RDR_DOT_JEAN-SHORTS_STAND_R_DAY_01")
-        super.init(texture: dot_stand, color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSizeMake(20, 20))
+        super.init(texture: dot_stand, color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSizeMake(40, 40))
         self.name = "hero"
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.physicsBody?.categoryBitMask = heroCategory
         self.physicsBody?.contactTestBitMask = obstacleCategory | ~groundCategory
-        
+        self.zPosition = 1
     }
     
     func runRight() {
@@ -32,7 +32,7 @@ class MLHero: SKSpriteNode {
     }
     
     func jump() {
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+        self.physicsBody?.applyImpulse(CGVectorMake(0, 45))
     }
     
     func stop() {
