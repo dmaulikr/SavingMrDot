@@ -68,8 +68,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func clear() {
-        print(self.frame.size.width)
-        print(self.frame.size.height)
         let scene = GameScene.init(size: CGSizeMake(self.frame.size.width, self.frame.size.width / 16 * 9))
         self.view?.presentScene(scene)
     }

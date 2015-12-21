@@ -10,18 +10,18 @@ import UIKit
 import SpriteKit
 
 class MLHero: SKSpriteNode {
-    let heroCategory = UInt32(0x1 << 0)
-    let obstacleCategory = UInt32(0x1 << 1)
-    let groundCategory = UInt32(0x1 << 2)
+    var constants = MyConstants()
     
     init() {
-        let dot_stand = SKTexture(imageNamed: "RDR_DOT_JEAN-SHORTS_STAND_R_DAY_01")
-        super.init(texture: dot_stand, color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSizeMake(40, 40))
+        let dot_stand = SKTexture(imageNamed: "DOT_JEAN_STAND")
+        super.init(texture: dot_stand, color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSizeMake(80, 80))
         self.name = "hero"
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-        self.physicsBody?.categoryBitMask = heroCategory
-        self.physicsBody?.contactTestBitMask = obstacleCategory | ~groundCategory
+        self.physicsBody?.categoryBitMask = constants.heroCategory
+        self.physicsBody?.contactTestBitMask = constants.obstacleCategory | ~constants.groundCategory
+        self.physicsBody?.allowsRotation = false
+        self.physicsBody?.angularVelocity = 0
         self.zPosition = 1
     }
     
@@ -29,6 +29,13 @@ class MLHero: SKSpriteNode {
         let incrementalRight = SKAction.moveByX(1.0, y: 0, duration: 0.01)
         let moveRight = SKAction.repeatActionForever(incrementalRight)
         self.runAction(moveRight)
+        
+        var gifTextures: [SKTexture] = []
+        for i in 0...9 {
+            gifTextures.append(SKTexture(imageNamed: "DOT_JEAN_Fall-\(i)"))
+        }
+        let runGif = SKAction.repeatActionForever(SKAction.animateWithTextures(gifTextures, timePerFrame: 0.125))
+        self.runAction(runGif)
     }
     
     func jump() {

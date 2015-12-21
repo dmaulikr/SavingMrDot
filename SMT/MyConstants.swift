@@ -8,6 +8,8 @@
 
 import Foundation
 
-class Constants {
-    
+class MyConstants {
+    let heroCategory = UInt32(0x1 << 0)
+    let obstacleCategory = UInt32(0x1 << 1)
+    let groundCategory = UInt32(0x1 << 2)
 }

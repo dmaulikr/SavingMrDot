@@ -10,14 +10,13 @@ import UIKit
 import SpriteKit
 
 class MLWorldGenerator: SKNode {
+    var constants = MyConstants()
+    
     var currentHiddenGroundX = CGFloat(0)
     var currentBackGroundX = CGFloat(0)
     var currentGroundX = CGFloat(0)
     var currentObstacleX = CGFloat(200)
     var world = SKNode()
-    
-    let obstacleCategory = UInt32(0x1 << 1)
-    let groundCategory = UInt32(0x1 << 2)
     
     override init() {
         super.init()
@@ -69,7 +68,7 @@ class MLWorldGenerator: SKNode {
         hiddenground.position = CGPointMake(currentHiddenGroundX, -height/2 + hiddenground.frame.size.height/2)
         hiddenground.zPosition = -1
         hiddenground.physicsBody = SKPhysicsBody(rectangleOfSize: hiddenground.size)
-        hiddenground.physicsBody?.categoryBitMask = groundCategory
+        hiddenground.physicsBody?.categoryBitMask = constants.groundCategory
         hiddenground.physicsBody?.dynamic = false
         hiddenground.name = "hiddenground"
         world.addChild(hiddenground)
@@ -96,7 +95,7 @@ class MLWorldGenerator: SKNode {
         let obstacle = SKSpriteNode(color: self.getRandomColor(), size: CGSizeMake(20, 40))
         obstacle.position = CGPointMake(currentObstacleX, hiddenground.position.y + hiddenground.frame.size.height/2 + obstacle.frame.size.height/2)
         obstacle.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle.size)
-        obstacle.physicsBody?.categoryBitMask = obstacleCategory
+        obstacle.physicsBody?.categoryBitMask = constants.obstacleCategory
         obstacle.physicsBody?.dynamic = false
         obstacle.name = "obstacle"
         world.addChild(obstacle)
