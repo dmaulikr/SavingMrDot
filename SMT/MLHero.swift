@@ -11,6 +11,7 @@ import SpriteKit
 
 class MLHero: SKSpriteNode {
     var constants = MyConstants()
+    var isJumping = false
     
     init() {
         let dot_stand = SKTexture(imageNamed: "DOT_JEAN_STAND")
@@ -19,7 +20,7 @@ class MLHero: SKSpriteNode {
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.physicsBody?.categoryBitMask = constants.heroCategory
-        self.physicsBody?.contactTestBitMask = constants.obstacleCategory | ~constants.groundCategory
+        self.physicsBody?.contactTestBitMask = constants.obstacleCategory | constants.groundCategory //~
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.angularVelocity = 0
         self.zPosition = 1
@@ -32,14 +33,22 @@ class MLHero: SKSpriteNode {
         
         var gifTextures: [SKTexture] = []
         for i in 0...9 {
-            gifTextures.append(SKTexture(imageNamed: "DOT_JEAN_Fall-\(i)"))
+            gifTextures.append(SKTexture(imageNamed: "DOT_JEAN_Run-\(i)"))
         }
         let runGif = SKAction.repeatActionForever(SKAction.animateWithTextures(gifTextures, timePerFrame: 0.125))
         self.runAction(runGif)
     }
     
     func jump() {
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 45))
+        if (!self.isJumping) {
+            self.physicsBody?.applyImpulse(CGVectorMake(0, 150))
+            self.runAction(SKAction.playSoundFileNamed("SOUNDS/DOT_JUMP_UP_1.wav", waitForCompletion: false))
+            self.isJumping = true
+        }
+    }
+    
+    func land() {
+        isJumping = false
     }
     
     func stop() {

@@ -18,6 +18,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let hero = MLHero()
     let generator = MLWorldGenerator()
     let pointsLabel = MLPointsLabel()
+    let highScoreLabel = MLPointsLabel()
+    
+    let data = GameData()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -25,6 +28,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //let height = width / 16 * 9
         
         //self.backgroundColor = SKColor.colorWithAlphaComponent()
+        
+        data.dataInit()
         
         self.addChild(world)
             
@@ -35,10 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hero.position = CGPointMake(0, -10)
         world.addChild(hero)
         
-        pointsLabel.setMyFontName(GAME_FONT)
-        pointsLabel.position = CGPointMake(-150, 70)
-        pointsLabel.name = "pointsLabel"
-        self.addChild(pointsLabel)
+        self.loadScoreLabels()
         
         let tapToBeginLabel = SKLabelNode(fontNamed: GAME_FONT)
         tapToBeginLabel.text = "tap to begin"
@@ -54,6 +56,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.handlePoints()
         self.handleGeneration()
         self.handleCleanUp()
+    }
+    
+    func loadScoreLabels() {
+        pointsLabel.setMyFontName(GAME_FONT)
+        pointsLabel.position = CGPointMake(-150, 70)
+        pointsLabel.name = "pointsLabel"
+        self.addChild(pointsLabel)
+        
+        data.load()
+        highScoreLabel.setMyFontName(GAME_FONT)
+        highScoreLabel.setPoints(data.highScore)
+        highScoreLabel.position = CGPointMake(150, 70)
+        highScoreLabel.name = "highScoreLabel"
+        self.addChild(highScoreLabel)
+        
+        let bestLabel = SKLabelNode(fontNamed: GAME_FONT)
+        bestLabel.position = CGPointMake(110, 70)
+        bestLabel.text = "Best"
+        bestLabel.fontSize = 16
+        self.addChild(bestLabel)
     }
     
     func centerOnNode(node: SKNode) {
@@ -88,6 +110,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToResetLabel.name = "tapToResetLabel"
         self.addChild(tapToResetLabel)
         self.animateWithPulse(tapToResetLabel)
+        self.updateHighScore()
+    }
+    
+    func updateHighScore() {
+        let currentPointLabel = self.childNodeWithName("pointsLabel") as! MLPointsLabel
+        let highestPointLabel = self.childNodeWithName("highScoreLabel") as! MLPointsLabel
+        if (currentPointLabel.number > highestPointLabel.number) {
+            highestPointLabel.setPoints(currentPointLabel.number)
+            data.highScore = currentPointLabel.number
+            data.save()
+        }
     }
     
     func handleGeneration() {
@@ -163,7 +196,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        self.gameOver()
+        if (contact.bodyA.node?.name == "hiddenground" || contact.bodyB.node?.name == "hiddenground") {
+            hero.land()
+        } else {
+            self.gameOver()
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
