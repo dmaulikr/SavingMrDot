@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameData {
+class RDRGameData {
     var filePath = ""
     var fileName = "/achive.data"
     var highScore = 0

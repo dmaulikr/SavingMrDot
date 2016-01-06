@@ -16,11 +16,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let world = SKNode()
     let dot = RDRDot()
-    let generator = MLWorldGenerator()
-    let pointsLabel = MLPointsLabel()
-    let highScoreLabel = MLPointsLabel()
+    let generator = RDRWorldGenerator()
+    let pointsLabel = RDRPointsLabel()
+    let highScoreLabel = RDRPointsLabel()
     
-    let data = GameData()
+    let data = RDRGameData()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -114,8 +114,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateHighScore() {
-        let currentPointLabel = self.childNodeWithName("pointsLabel") as! MLPointsLabel
-        let highestPointLabel = self.childNodeWithName("highScoreLabel") as! MLPointsLabel
+        let currentPointLabel = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
+        let highestPointLabel = self.childNodeWithName("highScoreLabel") as! RDRPointsLabel
         if (currentPointLabel.number > highestPointLabel.number) {
             highestPointLabel.setPoints(currentPointLabel.number)
             data.highScore = currentPointLabel.number
@@ -148,7 +148,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func handlePoints() {
         self.world.enumerateChildNodesWithName("obstacle") { node, stop in
             if (node.position.x < self.dot.position.x) {
-                let pl = self.childNodeWithName("pointsLabel") as! MLPointsLabel
+                let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
                 pl.increment()
             }
         }

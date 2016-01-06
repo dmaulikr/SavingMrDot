@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class RDRDot: SKSpriteNode {
-    var constants = MyConstants()
+    var constants = RDRConstants()
     var isJumping = false
     
     init() {

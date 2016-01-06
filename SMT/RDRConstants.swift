@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class MyConstants {
+class RDRConstants {
     let dotCategory = UInt32(0x1 << 0)
     let obstacleCategory = UInt32(0x1 << 1)
     let groundCategory = UInt32(0x1 << 2)

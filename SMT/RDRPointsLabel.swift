@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class MLPointsLabel: SKLabelNode {
+class RDRPointsLabel: SKLabelNode {
     var number = 0;
     
     override init() {

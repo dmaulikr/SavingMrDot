@@ -9,8 +9,8 @@
 import UIKit
 import SpriteKit
 
-class MLWorldGenerator: SKNode {
-    var constants = MyConstants()
+class RDRWorldGenerator: SKNode {
+    var constants = RDRConstants()
     
     var currentHiddenGroundX = CGFloat(0)
     var currentBackGroundX = CGFloat(0)
