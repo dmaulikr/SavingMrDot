@@ -15,7 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let GAME_FONT = "Helvetica" // AmericanTypewriter-Bold
     
     let world = SKNode()
-    let hero = MLHero()
+    let dot = RDRDot()
     let generator = MLWorldGenerator()
     let pointsLabel = MLPointsLabel()
     let highScoreLabel = MLPointsLabel()
@@ -37,8 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(generator)
         generator.populate()
         
-        hero.position = CGPointMake(0, -10)
-        world.addChild(hero)
+        dot.position = CGPointMake(0, -10)
+        world.addChild(dot)
         
         self.loadScoreLabels()
         
@@ -51,8 +51,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didSimulatePhysics() {
-        //let hero = self.childNodeWithName("hero") as! MLHero
-        self.centerOnNode(hero)
+        //let dot = self.childNodeWithName("dot") as! Dot
+        self.centerOnNode(dot)
         self.handlePoints()
         self.handleGeneration()
         self.handleCleanUp()
@@ -86,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func start() {
         isStarted = true
         self.childNodeWithName("tapToBeginLabel")?.removeFromParent()
-        hero.runRight()
+        dot.runRight()
     }
     
     func clear() {
@@ -96,7 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func gameOver() {
         self.isGameOver = true
-        hero.stop()
+        dot.stop()
         
         //pointsLabel.removeFromParent()
         let gameOverLabel = SKLabelNode(fontNamed: GAME_FONT)
@@ -125,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func handleGeneration() {
         self.world.enumerateChildNodesWithName("obstacle") { node, stop in
-            if (node.position.x < self.hero.position.x) {
+            if (node.position.x < self.dot.position.x) {
                 node.name = "obstacle_cancelled"
                 self.generator.generate()
             }
@@ -134,12 +134,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func handleCleanUp() {
         self.world.enumerateChildNodesWithName("ground") { node, stop in
-            if (node.position.x < self.hero.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
+            if (node.position.x < self.dot.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
                 node.removeFromParent()
             }
         }
         self.world.enumerateChildNodesWithName("obstacle_cancelled") { node, stop in
-            if (node.position.x < self.hero.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
+            if (node.position.x < self.dot.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
                 node.removeFromParent()
             }
         }
@@ -147,7 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func handlePoints() {
         self.world.enumerateChildNodesWithName("obstacle") { node, stop in
-            if (node.position.x < self.hero.position.x) {
+            if (node.position.x < self.dot.position.x) {
                 let pl = self.childNodeWithName("pointsLabel") as! MLPointsLabel
                 pl.increment()
             }
@@ -156,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
      
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
-        //let hero = self.childNodeWithName("hero") as! MLHero
+        //let dot = self.childNodeWithName("dot") as! Dot
         
         if (!isStarted) {
             self.start()
@@ -166,7 +166,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.clear()
             }
             else {
-                hero.jump()
+                dot.jump()
             }
         }
         
@@ -197,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         if (contact.bodyA.node?.name == "hiddenground" || contact.bodyB.node?.name == "hiddenground") {
-            hero.land()
+            dot.land()
         } else {
             self.gameOver()
         }

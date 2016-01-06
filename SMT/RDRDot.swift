@@ -1,5 +1,5 @@
 //
-//  MLHero.swift
+//  Dot.swift
 //  SMT
 //
 //  Created by Haoruo Peng on 12/15/15.
@@ -9,21 +9,21 @@
 import UIKit
 import SpriteKit
 
-class MLHero: SKSpriteNode {
+class RDRDot: SKSpriteNode {
     var constants = MyConstants()
     var isJumping = false
     
     init() {
         let dot_stand = SKTexture(imageNamed: "DOT_JEAN_STAND")
         super.init(texture: dot_stand, color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: CGSizeMake(80, 80))
-        self.name = "hero"
+        self.name = "dot"
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-        self.physicsBody?.categoryBitMask = constants.heroCategory
+        self.physicsBody?.categoryBitMask = constants.dotCategory
         self.physicsBody?.contactTestBitMask = constants.obstacleCategory | constants.groundCategory //~
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.angularVelocity = 0
-        self.zPosition = 1
+        self.zPosition = constants.dotZPosition
     }
     
     func runRight() {

@@ -7,9 +7,13 @@
 //
 
 import Foundation
+import SpriteKit
 
 class MyConstants {
-    let heroCategory = UInt32(0x1 << 0)
+    let dotCategory = UInt32(0x1 << 0)
     let obstacleCategory = UInt32(0x1 << 1)
     let groundCategory = UInt32(0x1 << 2)
+    
+    let dotZPosition = CGFloat(1.0)
+    
 }
