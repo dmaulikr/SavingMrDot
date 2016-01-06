@@ -18,6 +18,8 @@ class RDRWorldGenerator: SKNode {
     var currentObstacleX = CGFloat(0)
     var world = SKNode()
     
+    var count = 0
+    
     override init() {
         super.init()
         currentObstacleX = constants.initObstacleX
@@ -62,6 +64,17 @@ class RDRWorldGenerator: SKNode {
     }
     
     func generate() {
+        if (count == 3) {
+            count = 0
+            if (constants.gameDN == "day") {
+                constants.gameDN = "night"
+            } else {
+                constants.gameDN = "day"
+            }
+        } else {
+            count++
+        }
+        
         let width = self.scene!.size.width
         let height = width / 16 * 9
         

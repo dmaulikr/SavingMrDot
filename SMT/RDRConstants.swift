@@ -78,6 +78,7 @@ class RDRConstants {
 //self.backgroundColor = SKColor.colorWithAlphaComponent()
 //let dot = self.childNodeWithName("dot") as! RDRDot
 //pointsLabel.removeFromParent()
+//constants.gameDN.uppercaseString
 /*
 for touch in touches {
 let location = touch.locationInNode(self)
