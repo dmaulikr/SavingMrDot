@@ -65,7 +65,7 @@ class RDRWorldGenerator: SKNode {
         let width = self.scene!.size.width
         let height = width / 16 * 9
         
-        let hiddenground = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(width,constants.hiddengroundHeight))
+        let hiddenground = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(width,constants.hiddengroundHeight_Dot))
         hiddenground.position = CGPointMake(currentHiddenGroundX, -height/2 + hiddenground.frame.size.height/2)
         hiddenground.zPosition = constants.hiddengroundZPosition
         hiddenground.physicsBody = SKPhysicsBody(rectangleOfSize: hiddenground.size)
@@ -75,7 +75,7 @@ class RDRWorldGenerator: SKNode {
         world.addChild(hiddenground)
         currentHiddenGroundX += hiddenground.frame.size.width
         
-        let background = SKSpriteNode(imageNamed: "background_day")
+        let background = SKSpriteNode(imageNamed: "background_" + constants.gameDN)
         background.size.width = height / background.size.height * background.size.width
         background.size.height = height
         background.position = CGPointMake(currentBackGroundX, 0)
@@ -84,7 +84,7 @@ class RDRWorldGenerator: SKNode {
         world.addChild(background)
         currentBackGroundX += background.frame.size.width
         
-        let ground = SKSpriteNode(imageNamed: "ground_day")
+        let ground = SKSpriteNode(imageNamed: "ground_" + constants.gameDN)
         ground.size.height = ground.size.height / 2
         ground.size.width = ground.size.width / 2
         ground.position = CGPointMake(currentGroundX, -height/2 + ground.frame.size.height/2)

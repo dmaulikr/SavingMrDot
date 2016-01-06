@@ -10,27 +10,39 @@ import Foundation
 import SpriteKit
 
 class RDRConstants {
+    var dotName = "JEAN" // CAPTAIN ZIPPY
+    var gameDN = "day" // night
+    
     let dotCategory = UInt32(0x1 << 0)
     let obstacleCategory = UInt32(0x1 << 1)
     let groundCategory = UInt32(0x1 << 2)
+    let airShipCategory = UInt32(0x1 << 3)
     
     let dotZPosition = CGFloat(1.0)
     let hiddengroundZPosition = CGFloat(-1.0)
     let backgroundZPosition = CGFloat(-0.9)
     let groundZPosition = CGFloat(-0.5)
+    let airShipZPosition = CGFloat(0.5)
     
     let dotPosition = CGPointMake(0, -10)
+    let airShipPosition = CGPointMake(-75, 10)
     let pointPosition = CGPointMake(-150, 70)
     let initObstacleX = CGFloat(200)
     
     let dotSize = CGSizeMake(80, 80)
-    let hiddengroundHeight = CGFloat(10)
+    let dotPhysicsBodyWidthRatio = CGFloat(0.56)
+    let dotPhysicsBodyHeightRatio = CGFloat(0.80)
+    let airShipSize = CGSizeMake(316, 200)
+    let airShipPhysicsBodyWidthRatio = CGFloat(0.10)
+    let airShipPhysicsBodyHeightRatio = CGFloat(0.10)
     let obstacleSize = CGSizeMake(20, 40)
+    let hiddengroundHeight_Dot = CGFloat(10)
+    let hiddengroundHeight_Ship = CGFloat(50)
     
     let gameFont = "Helvetica" // AmericanTypewriter-Bold
     let textSize = CGFloat(20)
     
-    let jumpVec = CGVectorMake(0, 150)
+    let jumpVec = CGVectorMake(0, 100)
     
     let motionMap = [
         "Run"              : 9,

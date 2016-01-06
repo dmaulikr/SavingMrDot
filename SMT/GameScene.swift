@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let world = SKNode()
     let dot = RDRDot()
+    let ship = RDRAirShip()
     let generator = RDRWorldGenerator()
     let pointsLabel = RDRPointsLabel()
     let highScoreLabel = RDRPointsLabel()
@@ -38,6 +39,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         dot.position = constants.dotPosition
         world.addChild(dot)
+        
+        ship.position = constants.airShipPosition
+        world.addChild(ship)
+        ship.open()
         
         self.loadScoreLabels()
         
@@ -110,6 +115,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 node.removeFromParent()
             }
         }
+        self.world.enumerateChildNodesWithName("background") { node, stop in
+            if (node.position.x < self.dot.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
+                node.removeFromParent()
+            }
+        }
+        self.world.enumerateChildNodesWithName("hiddenground") { node, stop in
+            if (node.position.x < self.dot.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
+                node.removeFromParent()
+            }
+        }
         self.world.enumerateChildNodesWithName("obstacle_cancelled") { node, stop in
             if (node.position.x < self.dot.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
                 node.removeFromParent()
@@ -135,6 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isStarted = true
         self.childNodeWithName("tapToBeginLabel")?.removeFromParent()
         dot.runRight()
+        ship.moveRight()
     }
     
     func clear() {
@@ -176,7 +192,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (contact.bodyA.node?.name == "hiddenground" || contact.bodyB.node?.name == "hiddenground") {
             dot.land()
         } else {
-            self.gameOver()
+            if (contact.bodyA.node?.name == "airship" || contact.bodyB.node?.name == "airship") {
+                
+            } else {
+                self.gameOver()
+            }
         }
     }
 

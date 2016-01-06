@@ -15,13 +15,13 @@ class RDRDot: SKSpriteNode {
     var isJumping = false
     
     init() {
-        let dot_stand = SKTexture(imageNamed: "DOT_JEAN_STAND")
+        let dot_stand = SKTexture(imageNamed: "DOT_" + constants.dotName + "_STAND")
         super.init(texture: dot_stand, color: UIColor.whiteColor().colorWithAlphaComponent(0.5), size: constants.dotSize)
         self.name = "dot"
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.size.width * constants.dotPhysicsBodyWidthRatio, self.size.height * constants.dotPhysicsBodyHeightRatio))
         self.physicsBody?.categoryBitMask = constants.dotCategory
-        self.physicsBody?.contactTestBitMask = constants.obstacleCategory | constants.groundCategory //~
+        self.physicsBody?.contactTestBitMask = constants.obstacleCategory | constants.groundCategory | constants.airShipCategory //~
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.angularVelocity = 0
         self.zPosition = constants.dotZPosition
@@ -29,7 +29,7 @@ class RDRDot: SKSpriteNode {
     
     func runRight() {
         self.runAction(motions.moveRight())
-        self.runAction(motions.playGif("DOT_JEAN_Run", frames: constants.motionMap["Run"]!))
+        self.runAction(motions.playGif("DOT_" + constants.dotName + "_Run", frames: constants.motionMap["Run"]!))
     }
     
     func jump() {
