@@ -15,13 +15,50 @@ class RDRConstants {
     let groundCategory = UInt32(0x1 << 2)
     
     let dotZPosition = CGFloat(1.0)
+    let hiddengroundZPosition = CGFloat(-1.0)
+    let backgroundZPosition = CGFloat(-0.9)
+    let groundZPosition = CGFloat(-0.5)
     
     let dotPosition = CGPointMake(0, -10)
     let pointPosition = CGPointMake(-150, 70)
+    let initObstacleX = CGFloat(200)
+    
+    let dotSize = CGSizeMake(80, 80)
+    let hiddengroundHeight = CGFloat(10)
+    let obstacleSize = CGSizeMake(20, 40)
     
     let gameFont = "Helvetica" // AmericanTypewriter-Bold
     let textSize = CGFloat(20)
     
+    let jumpVec = CGVectorMake(0, 150)
+    
+    let motionMap = [
+        "Run"              : 9,
+        "Fall"             : 9,
+        "Burn"             : 11,
+        "Hurt-before"      : 2,
+        "Hurt-after"       : 11,
+        "Jump-down"        : 1,
+        "Jump-up"          : 1,
+        
+        "FIRE-BEGIN"       : 14,
+        "FIRE-DURING"      : 8,
+        "FIRE-END"         : 14,
+        
+        "CAPTURE"          : 33,
+        "CLOSE"            : 12,
+        "IDLE"             : 37,
+        "NOSHIP_FISH_DOWN" : 9,
+        "NOSHIP_FISH_UP"   : 10,
+        "OPEN"             : 20,
+        "REACH"            : 2,
+        "RETRACT"          : 2,
+        "SHIP_FISH_DOWN"   : 5,
+        "SHIP_FISH_UP"     : 4
+    ]
+    
+    init() {
+    }
 }
 
 //self.backgroundColor = SKColor.colorWithAlphaComponent()

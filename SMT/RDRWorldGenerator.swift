@@ -15,11 +15,12 @@ class RDRWorldGenerator: SKNode {
     var currentHiddenGroundX = CGFloat(0)
     var currentBackGroundX = CGFloat(0)
     var currentGroundX = CGFloat(0)
-    var currentObstacleX = CGFloat(200)
+    var currentObstacleX = CGFloat(0)
     var world = SKNode()
     
     override init() {
         super.init()
+        currentObstacleX = constants.initObstacleX
     }
     
     func setMyWorld(w: SKNode) {
@@ -64,9 +65,9 @@ class RDRWorldGenerator: SKNode {
         let width = self.scene!.size.width
         let height = width / 16 * 9
         
-        let hiddenground = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(width,10))
+        let hiddenground = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(width,constants.hiddengroundHeight))
         hiddenground.position = CGPointMake(currentHiddenGroundX, -height/2 + hiddenground.frame.size.height/2)
-        hiddenground.zPosition = -1
+        hiddenground.zPosition = constants.hiddengroundZPosition
         hiddenground.physicsBody = SKPhysicsBody(rectangleOfSize: hiddenground.size)
         hiddenground.physicsBody?.categoryBitMask = constants.groundCategory
         hiddenground.physicsBody?.dynamic = false
@@ -78,7 +79,7 @@ class RDRWorldGenerator: SKNode {
         background.size.width = height / background.size.height * background.size.width
         background.size.height = height
         background.position = CGPointMake(currentBackGroundX, 0)
-        background.zPosition = -0.9
+        background.zPosition = constants.backgroundZPosition
         background.name = "background"
         world.addChild(background)
         currentBackGroundX += background.frame.size.width
@@ -87,12 +88,12 @@ class RDRWorldGenerator: SKNode {
         ground.size.height = ground.size.height / 2
         ground.size.width = ground.size.width / 2
         ground.position = CGPointMake(currentGroundX, -height/2 + ground.frame.size.height/2)
-        ground.zPosition = -0.5
+        ground.zPosition = constants.groundZPosition
         ground.name = "ground"
         world.addChild(ground)
         currentGroundX += ground.frame.size.width
         
-        let obstacle = SKSpriteNode(color: self.getRandomColor(), size: CGSizeMake(20, 40))
+        let obstacle = SKSpriteNode(color: self.getRandomColor(), size: constants.obstacleSize)
         obstacle.position = CGPointMake(currentObstacleX, hiddenground.position.y + hiddenground.frame.size.height/2 + obstacle.frame.size.height/2)
         obstacle.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle.size)
         obstacle.physicsBody?.categoryBitMask = constants.obstacleCategory

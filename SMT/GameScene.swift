@@ -13,8 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isGameOver = false
     
     var constants = RDRConstants()
+    var motions = RDRMotions()
     let data = RDRGameData()
-    let motions = RDRMotions()
     
     let world = SKNode()
     let dot = RDRDot()

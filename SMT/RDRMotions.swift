@@ -16,4 +16,21 @@ class RDRMotions {
         let pulse = SKAction.sequence([disappear, appear])
         return SKAction.repeatActionForever(pulse)
     }
+    
+    func moveRight() -> SKAction {
+        let incrementalRight = SKAction.moveByX(1.0, y: 0, duration: 0.01)
+        return SKAction.repeatActionForever(incrementalRight)
+    }
+    
+    func playGif(fileName: String, frames: Int) -> SKAction {
+        var gifTextures: [SKTexture] = []
+        for i in 0...frames {
+            gifTextures.append(SKTexture(imageNamed: fileName + "-\(i)"))
+        }
+        return SKAction.repeatActionForever(SKAction.animateWithTextures(gifTextures, timePerFrame: 0.125))
+    }
+    
+    func playSound(fileName: String) -> SKAction {
+        return SKAction.playSoundFileNamed("SOUNDS/" + fileName + ".wav", waitForCompletion: false)
+    }
 }
