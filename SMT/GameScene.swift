@@ -162,6 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.isGameOver = true
         
         dot.stop()
+        ship.stop()
         
         let gameOverLabel = SKLabelNode(fontNamed: constants.gameFont)
         gameOverLabel.text = "Game Over"

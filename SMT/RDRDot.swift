@@ -28,13 +28,14 @@ class RDRDot: SKSpriteNode {
     }
     
     func runRight() {
-        self.runAction(motions.moveRight())
+        self.runAction(motions.moveRight(constants.dotSpeed))
         self.runAction(motions.playGif("DOT_" + constants.dotName + "_Run", frames: constants.motionMap["Run"]!))
     }
     
     func jump() {
         if (!self.isJumping) {
             self.physicsBody?.applyImpulse(constants.jumpVec)
+            self.runAction(SKAction.sequence([motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-up", frames: constants.motionMap["Jump-up"]!), motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-down", frames: constants.motionMap["Jump-down"]!)]))
             self.runAction(motions.playSound("DOT_JUMP_UP_1"))
             self.isJumping = true
         }
@@ -42,6 +43,22 @@ class RDRDot: SKSpriteNode {
     
     func land() {
         isJumping = false
+    }
+    
+    func burn() {
+        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Burn", frames: constants.motionMap["Burn"]!))
+    }
+    
+    func fall() {
+        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Fall", frames: constants.motionMap["Fall"]!))
+    }
+    
+    func hurtBefore() {
+        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!))
+    }
+    
+    func hurtAfter() {
+        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!))
     }
     
     func stop() {

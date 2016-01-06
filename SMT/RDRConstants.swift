@@ -43,6 +43,8 @@ class RDRConstants {
     let textSize = CGFloat(20)
     
     let jumpVec = CGVectorMake(0, 100)
+    var dotSpeed = Double(100)
+    var airShipSpeed = Double(100)
     
     let motionMap = [
         "Run"              : 9,

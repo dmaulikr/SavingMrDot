@@ -28,11 +28,11 @@ class RDRAirShip: SKSpriteNode {
     }
     
     func open() {
-        self.runAction(motions.playGif("AIRSHIP_OPEN", frames: constants.motionMap["OPEN"]!))
+        self.runAction(SKAction.sequence([motions.playGifForOnce("AIRSHIP_OPEN", frames: constants.motionMap["OPEN"]!), motions.playGif("AIRSHIP_IDLE", frames: constants.motionMap["IDLE"]!)]))
     }
     
     func moveRight() {
-        self.runAction(motions.moveRight())
+        self.runAction(motions.moveRight(constants.airShipSpeed))
         self.runAction(motions.playGif("AIRSHIP_IDLE", frames: constants.motionMap["IDLE"]!))
     }
     
@@ -63,9 +63,13 @@ class RDRAirShip: SKSpriteNode {
     func reach() {
         self.runAction(motions.playGif("AIRSHIP_REACH", frames: constants.motionMap["REACH"]!))
     }
-    
+    // CLAW_REACH
     func retract() {
         self.runAction(motions.playGif("AIRSHIP_RETRACT", frames: constants.motionMap["RETRACT"]!))
+    }
+    
+    func stop() {
+        self.removeAllActions()
     }
     
     required init?(coder aDecoder: NSCoder) {
