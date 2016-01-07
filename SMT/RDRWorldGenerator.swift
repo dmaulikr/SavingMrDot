@@ -130,7 +130,7 @@ class RDRWorldGenerator: SKNode {
         obstacle.physicsBody?.dynamic = false
         obstacle.name = "obstacle"
         world.addChild(obstacle)
-        currentObstacleX += 150
+        currentObstacleX += 600
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -12,7 +12,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isStarted = false
     var isGameOver = false
     
-    var threshold = 1
+    var threshold = 0
     
     var constants = RDRConstants()
     var motions = RDRMotions()
@@ -158,9 +158,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (dist < 3 * length) {
             dayPlayer.playMusic()
         } else {
-            let p = (dist - 3 * length) / length
+            let p = (dist - 3 * length) / (6 * length)
             if (p > CGFloat(threshold)) {
-                if (threshold % 2 == 1) {
+                if (threshold % 2 == 0) {
                     dayPlayer.pauseMusic()
                     nightPlayer.playMusic()
                 } else {
@@ -170,7 +170,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 threshold++
                 
             }
-            
         }
     }
     
