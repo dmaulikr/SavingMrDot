@@ -30,6 +30,8 @@ class RDRDot: SKSpriteNode {
     func runRight() {
         self.runAction(motions.moveRight(constants.dotSpeed))
         self.runAction(motions.playGif("DOT_" + constants.dotName + "_Run", frames: constants.motionMap["Run"]!))
+        self.runAction(motions.playSound("DOT_RUN_HIGH_SPEED"))
+        //self.runAction(motions.playSound("DOT_RUN_LOW_SPEED"))
     }
     
     func jump() {
@@ -37,6 +39,8 @@ class RDRDot: SKSpriteNode {
             self.physicsBody?.applyImpulse(constants.jumpVec)
             self.runAction(SKAction.sequence([motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-up", frames: constants.motionMap["Jump-up"]!), motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-down", frames: constants.motionMap["Jump-down"]!)]))
             self.runAction(motions.playSound("DOT_JUMP_UP_1"))
+            //self.runAction(motions.playSound("DOT_JUMP_UP_1"))
+            //self.runAction(motions.playSound("DOT_JUMP_DOWN"))
             self.isJumping = true
         }
     }
@@ -47,18 +51,28 @@ class RDRDot: SKSpriteNode {
     
     func burn() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Burn", frames: constants.motionMap["Burn"]!))
+        self.runAction(motions.playSound("DOT_BURN"))
     }
     
     func fall() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Fall", frames: constants.motionMap["Fall"]!))
+        self.runAction(motions.playSound("DOT_FALL"))
     }
     
     func hurtBefore() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!))
+        self.runAction(motions.playSound("DOT_HURT"))
     }
     
     func hurtAfter() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!))
+        self.runAction(motions.playSound("DOT_HURT_AH"))
+    }
+    
+    func captured() {
+        self.runAction(motions.playSound("DOT_CAUGHT"))
+        self.runAction(motions.playSound("DOT_SCREAM_CAPTURE"))
+        //self.runAction(motions.playSound("DOT_SCREAM_TANK"))
     }
     
     func stop() {

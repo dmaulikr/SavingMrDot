@@ -99,6 +99,5 @@ self.addChild(sprite)
 }
 */
 
-// music
 // jump-motion
 // touch
