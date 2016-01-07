@@ -36,8 +36,7 @@ class RDRConstants {
     let airShipPhysicsBodyWidthRatio = CGFloat(0.10)
     let airShipPhysicsBodyHeightRatio = CGFloat(0.10)
     let obstacleSize = CGSizeMake(20, 40)
-    let hiddengroundHeight_Dot = CGFloat(10)
-    let hiddengroundHeight_Ship = CGFloat(50)
+    let hiddengroundHeight = CGFloat(10)
     
     let gameFont = "Helvetica" // AmericanTypewriter-Bold
     let textSize = CGFloat(20)

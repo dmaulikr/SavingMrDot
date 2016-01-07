@@ -104,8 +104,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.world.enumerateChildNodesWithName("obstacle") { node, stop in
             if (node.position.x < self.dot.position.x) {
                 node.name = "obstacle_cancelled"
-                self.generator.generate()
+                self.generator.generateObstacle()
             }
+        }
+        if (self.dot.position.x > generator.currentGroundX - self.frame.width * 3) {
+            self.generator.generateForeBackGround()
+        }
+        if (self.dot.position.x > generator.currentHiddenGroundX - self.frame.width * 3) {
+            self.generator.generateHiddenGround()
         }
     }
     
