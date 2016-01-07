@@ -35,7 +35,7 @@ class RDRAirShip: SKSpriteNode {
     func moveRight() {
         self.runAction(motions.moveRight(constants.airShipSpeed))
         self.runAction(motions.playGif("AIRSHIP_IDLE", frames: constants.motionMap["IDLE"]!))
-        self.runAction(SKAction.repeatActionForever(motions.playSound("AIRSHIP_FLY_BY")))
+        self.runAction(motions.playSound("AIRSHIP_FLY_BY"))
         //self.runAction(motions.playSound("AIRSHIP_FLY_IN"))
         //self.runAction(motions.playSound("AIRSHIP_FLY_AWAY"))
     }
