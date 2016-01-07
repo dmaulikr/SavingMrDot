@@ -14,6 +14,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var constants = RDRConstants()
     var motions = RDRMotions()
+    let audioPlayer = RDRAudioPlayer()
+    let audioPlayer2 = RDRAudioPlayer()
     let data = RDRGameData()
     
     let world = SKNode()
@@ -47,6 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.loadScoreLabels()
         
         self.loadTapToBeginLabel()
+        
+        audioPlayer.playMusic("MUSIC")
+        audioPlayer2.playMusic("BACKGROUND_DAY")
     }
     
     func loadScoreLabels() {
@@ -169,6 +174,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         dot.stop()
         ship.stop()
+        self.removeAllActions()
         
         let gameOverLabel = SKLabelNode(fontNamed: constants.gameFont)
         gameOverLabel.text = "Game Over"
