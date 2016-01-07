@@ -237,7 +237,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         if (contact.bodyA.node?.name == "hiddenground" || contact.bodyB.node?.name == "hiddenground") {
-            dot.land()
+            if (dot.isJumping) {
+                dot.land()
+            }
         } else {
             if (contact.bodyA.node?.name == "airship" || contact.bodyB.node?.name == "airship") {
                 

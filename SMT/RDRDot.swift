@@ -28,24 +28,30 @@ class RDRDot: SKSpriteNode {
     }
     
     func runRight() {
+        self.removeAllActions()
         self.runAction(motions.moveRight(constants.dotSpeed))
         self.runAction(motions.playGif("DOT_" + constants.dotName + "_Run", frames: constants.motionMap["Run"]!))
-        self.runAction(motions.playSound("DOT_RUN_HIGH_SPEED"))
-        //self.runAction(motions.playSound("DOT_RUN_LOW_SPEED"))
+        self.runAction(motions.playSound("DOT_RUN_LOW_SPEED"))
+        //self.runAction(motions.playSound("DOT_RUN_HIGH_SPEED"))
     }
     
     func jump() {
         if (!self.isJumping) {
+            self.removeAllActions()
+            self.runAction(motions.moveRight(constants.dotSpeed))
             self.physicsBody?.applyImpulse(constants.jumpVec)
-            self.runAction(SKAction.sequence([motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-up", frames: constants.motionMap["Jump-up"]!), motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-down", frames: constants.motionMap["Jump-down"]!)]))
-            self.runAction(motions.playSound("DOT_JUMP_UP_1"))
-            //self.runAction(motions.playSound("DOT_JUMP_UP_1"))
-            //self.runAction(motions.playSound("DOT_JUMP_DOWN"))
+            self.texture = SKTexture(imageNamed: "DOT_" + constants.dotName + "_JUMP")
+            let rand = arc4random() % 2 + 1
+            self.runAction(motions.playSound("DOT_JUMP_UP_" + String(rand)))
             self.isJumping = true
         }
     }
     
     func land() {
+        self.removeAllActions()
+        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-down", frames: constants.motionMap["Jump-down"]!))
+        self.runAction(motions.playSound("DOT_JUMP_DOWN"))
+        self.runRight()
         isJumping = false
     }
     

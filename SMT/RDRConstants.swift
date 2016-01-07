@@ -99,5 +99,7 @@ self.addChild(sprite)
 }
 */
 
-// jump-motion
 // touch
+// CAPTURE-motion
+// Obstacle
+// MENU
