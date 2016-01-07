@@ -12,7 +12,7 @@ import AVFoundation
 class RDRAudioPlayer {
     var player: AVAudioPlayer!
     
-    func playMusic(filename: String) {
+    init(filename: String) {
         let url = NSBundle.mainBundle().URLForResource("SOUNDS/" + filename, withExtension: "mp3")
         if (url == nil) {
             print("Can not find file")
@@ -30,8 +30,22 @@ class RDRAudioPlayer {
         }
         
         player.numberOfLoops = -1
-        player.volume = 0.1
         player.prepareToPlay()
+    }
+    
+    func setVolume(vol: Float) {
+        player.volume = vol
+    }
+    
+    func playMusic() {
         player.play()
+    }
+    
+    func pauseMusic() {
+        player.pause()
+    }
+    
+    func stopMusic() {
+        player.stop()
     }
 }

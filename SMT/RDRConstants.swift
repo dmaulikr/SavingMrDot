@@ -45,6 +45,9 @@ class RDRConstants {
     var dotSpeed = Double(100)
     var airShipSpeed = Double(100)
     
+    let musicVolume = Float(0.1)
+    let backgroundVolume = Float(0.5)
+    
     let motionMap = [
         "Run"              : 9,
         "Fall"             : 9,
@@ -95,3 +98,7 @@ sprite.runAction(SKAction.repeatActionForever(action))
 self.addChild(sprite)
 }
 */
+
+// music
+// jump-motion
+// touch

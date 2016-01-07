@@ -12,10 +12,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isStarted = false
     var isGameOver = false
     
+    var threshold = 1
+    
     var constants = RDRConstants()
     var motions = RDRMotions()
-    let audioPlayer = RDRAudioPlayer()
-    let audioPlayer2 = RDRAudioPlayer()
+    let musicPlayer = RDRAudioPlayer(filename: "MUSIC")
+    let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY")
+    let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT")
     let data = RDRGameData()
     
     let world = SKNode()
@@ -50,8 +53,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.loadTapToBeginLabel()
         
-        audioPlayer.playMusic("MUSIC")
-        audioPlayer2.playMusic("BACKGROUND_DAY")
+        musicPlayer.setVolume(constants.musicVolume)
+        dayPlayer.setVolume(constants.backgroundVolume)
+        nightPlayer.setVolume(constants.backgroundVolume)
+        musicPlayer.playMusic()
     }
     
     func loadScoreLabels() {
@@ -89,6 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.handlePoints()
         self.handleGeneration()
         self.handleCleanUp()
+        self.handleBackgroundMusic()
     }
     
     func centerOnNode(node: SKNode) {
@@ -143,6 +149,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func handleBackgroundMusic() {
+        let dist = dot.position.x
+        var length = CGFloat(0)
+        self.world.enumerateChildNodesWithName("background") { node, stop in
+            length = node.frame.size.width
+        }
+        if (dist < 3 * length) {
+            dayPlayer.playMusic()
+        } else {
+            let p = (dist - 3 * length) / length
+            if (p > CGFloat(threshold)) {
+                if (threshold % 2 == 1) {
+                    dayPlayer.pauseMusic()
+                    nightPlayer.playMusic()
+                } else {
+                    nightPlayer.pauseMusic()
+                    dayPlayer.playMusic()
+                }
+                threshold++
+                
+            }
+            
+        }
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if (!isStarted) {
             self.start()
@@ -189,6 +220,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToResetLabel.runAction(motions.animateWithPulse())
         
         self.updateHighScore()
+        
+        musicPlayer.stopMusic()
+        dayPlayer.stopMusic()
+        nightPlayer.stopMusic()
     }
     
     func updateHighScore() {
