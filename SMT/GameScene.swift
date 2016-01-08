@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Haoruo Peng. All rights reserved.
 //
 
+import UIKit
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -19,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let musicPlayer = RDRAudioPlayer(filename: "MUSIC")
     let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY")
     let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT")
+    let touchHandler = RDRGameTouchHandler()
     let data = RDRGameData()
     
     let world = SKNode()
@@ -168,12 +170,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     dayPlayer.playMusic()
                 }
                 threshold++
-                
             }
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
+            let t = RDRGameTouch(loc: touch.locationInNode(self), t: touch.timestamp)
+            touchHandler.addTouch(t)
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if (!isStarted) {
             self.start()
         }
@@ -182,7 +190,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.clear()
             }
             else {
-                dot.jump()
+                for touch in touches {
+                    let t = RDRGameTouch(loc: touch.locationInNode(self), t: touch.timestamp)
+                    let jumpRatio = touchHandler.computeLine(t)
+                    print("Ratio" + jumpRatio.description)
+                    dot.jump(jumpRatio)
+                }
             }
         }
     }

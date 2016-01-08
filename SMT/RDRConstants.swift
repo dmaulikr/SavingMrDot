@@ -41,9 +41,10 @@ class RDRConstants {
     let gameFont = "Helvetica" // AmericanTypewriter-Bold
     let textSize = CGFloat(20)
     
-    let jumpVec = CGVectorMake(0, 100)
-    var dotSpeed = Double(100)
-    var airShipSpeed = Double(100)
+    let jumpVec = Double(100)
+    var dotSpeed = Double(150)
+    var dotHorizonSpeed = Double(50)
+    var airShipSpeed = Double(120)
     
     let musicVolume = Float(0.08)
     let backgroundVolume = Float(0.5)
@@ -99,7 +100,6 @@ self.addChild(sprite)
 }
 */
 
-// touch
 // CAPTURE-motion
 // Obstacle
 // MENU

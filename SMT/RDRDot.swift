@@ -35,11 +35,12 @@ class RDRDot: SKSpriteNode {
         //self.runAction(motions.playSound("DOT_RUN_HIGH_SPEED"))
     }
     
-    func jump() {
+    func jump(ratio: Double) {
         if (!self.isJumping) {
             self.removeAllActions()
-            self.runAction(motions.moveRight(constants.dotSpeed))
-            self.physicsBody?.applyImpulse(constants.jumpVec)
+            let verticalRatio = sqrt(1 - ratio * ratio)
+            self.runAction(motions.moveRight(constants.dotSpeed * ratio + constants.dotHorizonSpeed))
+            self.physicsBody?.applyImpulse(CGVectorMake(0, CGFloat(constants.jumpVec * verticalRatio)))
             self.texture = SKTexture(imageNamed: "DOT_" + constants.dotName + "_JUMP")
             let rand = arc4random() % 2 + 1
             self.runAction(motions.playSound("DOT_JUMP_UP_" + String(rand)))
