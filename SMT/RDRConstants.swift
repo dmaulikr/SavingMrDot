@@ -12,6 +12,10 @@ import SpriteKit
 class RDRConstants {
     var dotName = "JEAN" // CAPTAIN ZIPPY
     var gameDN = "day" // night
+    var musicVolume = Float(0.08)
+    var backgroundVolume = Float(0.5)
+    var soundVolume = Float(0.9)
+    var difficulty = Float(0.5)
     
     let dotCategory = UInt32(0x1 << 0)
     let obstacleCategory = UInt32(0x1 << 1)
@@ -42,12 +46,9 @@ class RDRConstants {
     let textSize = CGFloat(20)
     
     let jumpVec = Double(100)
-    var dotSpeed = Double(150)
-    var dotHorizonSpeed = Double(50)
-    var airShipSpeed = Double(120)
-    
-    let musicVolume = Float(0.08)
-    let backgroundVolume = Float(0.5)
+    let dotSpeed = Double(150)
+    let dotHorizonSpeed = Double(50)
+    let airShipSpeed = Double(120)
     
     let motionMap = [
         "Run"              : 9,
@@ -100,6 +101,6 @@ self.addChild(sprite)
 }
 */
 
-// CAPTURE-motion
+// music
 // Obstacle
 // MENU

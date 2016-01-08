@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import SpriteKit
 
 class RDRAudioPlayer {
     var player: AVAudioPlayer!
@@ -47,5 +48,7 @@ class RDRAudioPlayer {
     
     func stopMusic() {
         player.stop()
+        
+        //SKAction.runBlock({self.player.play()})
     }
 }

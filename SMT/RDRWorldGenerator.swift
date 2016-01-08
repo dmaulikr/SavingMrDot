@@ -11,11 +11,12 @@ import SpriteKit
 
 class RDRWorldGenerator: SKNode {
     var constants = RDRConstants()
+    var obstacleGenerator = RDRObstacleGenerator()
     
     var currentHiddenGroundX = CGFloat(0)
     var currentBackGroundX = CGFloat(0)
     var currentGroundX = CGFloat(0)
-    var currentObstacleX = CGFloat(0)
+    
     var world = SKNode()
     
     var width = CGFloat(0)
@@ -25,45 +26,17 @@ class RDRWorldGenerator: SKNode {
     
     override init() {
         super.init()
-        currentObstacleX = constants.initObstacleX
     }
     
     func setMyWorld(w: SKNode) {
         world = w
     }
     
-    func getRandomColor() -> UIColor {
-        let rand = arc4random() % 6
-        var color = UIColor()
-        switch (rand) {
-        case 0:
-            color = UIColor.redColor()
-            break
-        case 1:
-            color = UIColor.orangeColor()
-            break
-        case 2:
-            color = UIColor.yellowColor()
-            break
-        case 3:
-            color = UIColor.greenColor()
-            break
-        case 4:
-            color = UIColor.purpleColor()
-            break
-        case 5:
-            color = UIColor.blueColor()
-            break
-        default:
-            break
-        }
-        return color
-    }
-    
     func populate() {
         width = self.scene!.size.width
         height = width / 16 * 9
 
+        obstacleGenerator.setScreenHeight(height)
         for _ in 1...3 {
             generateHiddenGround()
             generateForeBackGround()
@@ -123,14 +96,7 @@ class RDRWorldGenerator: SKNode {
     }
     
     func generateObstacle() {
-        let obstacle = SKSpriteNode(color: self.getRandomColor(), size: constants.obstacleSize)
-        obstacle.position = CGPointMake(currentObstacleX, -height/2 + constants.hiddengroundHeight + obstacle.frame.size.height/2)
-        obstacle.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle.size)
-        obstacle.physicsBody?.categoryBitMask = constants.obstacleCategory
-        obstacle.physicsBody?.dynamic = false
-        obstacle.name = "obstacle"
-        world.addChild(obstacle)
-        currentObstacleX += 600
+        world.addChild(obstacleGenerator.generate())
     }
 
     required init?(coder aDecoder: NSCoder) {
