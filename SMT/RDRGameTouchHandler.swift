@@ -38,6 +38,9 @@ class RDRGameTouchHandler {
             c += Double(location.x * location.x)
             d += Double(location.x * location.y)
         }
+        if (n * c - a * a == 0) {
+            return 1
+        }
         let slope = (n * d - a * b) / (n * c - a * a)
         let ratio = 1 / (1 + slope * slope)
         return ratio

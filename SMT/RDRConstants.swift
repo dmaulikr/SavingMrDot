@@ -83,24 +83,9 @@ class RDRConstants {
 //let dot = self.childNodeWithName("dot") as! RDRDot
 //pointsLabel.removeFromParent()
 //constants.gameDN.uppercaseString
-/*
-for touch in touches {
-let location = touch.locationInNode(self)
 
-let sprite = SKSpriteNode(imageNamed:"Spaceship")
 
-sprite.xScale = 0.5
-sprite.yScale = 0.5
-sprite.position = location
+// video: https://youtu.be/IfOKH5kVLGo
 
-let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-
-sprite.runAction(SKAction.repeatActionForever(action))
-
-self.addChild(sprite)
-}
-*/
-
-// music
 // Obstacle
 // MENU

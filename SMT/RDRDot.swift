@@ -13,6 +13,7 @@ class RDRDot: SKSpriteNode {
     var constants = RDRConstants()
     var motions = RDRMotions()
     var isJumping = false
+    var soundEffects = [String: RDRAudioPlayer]()
     
     init() {
         let dot_stand = SKTexture(imageNamed: "DOT_" + constants.dotName + "_STAND")
@@ -31,7 +32,8 @@ class RDRDot: SKSpriteNode {
         self.removeAllActions()
         self.runAction(motions.moveRight(constants.dotSpeed))
         self.runAction(motions.playGif("DOT_" + constants.dotName + "_Run", frames: constants.motionMap["Run"]!))
-        self.runAction(motions.playSound("DOT_RUN_LOW_SPEED"))
+        self.playSoundEffect("DOT_RUN_LOW_SPEED")
+        //self.runAction(motions.playSound("DOT_RUN_LOW_SPEED"), withKey: "run_sound")
         //self.runAction(motions.playSound("DOT_RUN_HIGH_SPEED"))
     }
     
@@ -43,7 +45,7 @@ class RDRDot: SKSpriteNode {
             self.physicsBody?.applyImpulse(CGVectorMake(0, CGFloat(constants.jumpVec * verticalRatio)))
             self.texture = SKTexture(imageNamed: "DOT_" + constants.dotName + "_JUMP")
             let rand = arc4random() % 2 + 1
-            self.runAction(motions.playSound("DOT_JUMP_UP_" + String(rand)))
+            self.playSoundEffect("DOT_JUMP_UP_" + String(rand))
             self.isJumping = true
         }
     }
@@ -51,39 +53,65 @@ class RDRDot: SKSpriteNode {
     func land() {
         self.removeAllActions()
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-down", frames: constants.motionMap["Jump-down"]!))
-        self.runAction(motions.playSound("DOT_JUMP_DOWN"))
+        self.playSoundEffect("DOT_JUMP_DOWN")
         self.runRight()
         isJumping = false
     }
     
     func burn() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Burn", frames: constants.motionMap["Burn"]!))
-        self.runAction(motions.playSound("DOT_BURN"))
+        self.playSoundEffect("DOT_BURN")
     }
     
     func fall() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Fall", frames: constants.motionMap["Fall"]!))
-        self.runAction(motions.playSound("DOT_FALL"))
+        self.playSoundEffect("DOT_FALL")
     }
     
     func hurtBefore() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!))
-        self.runAction(motions.playSound("DOT_HURT"))
+        self.playSoundEffect("DOT_HURT")
     }
     
     func hurtAfter() {
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!))
-        self.runAction(motions.playSound("DOT_HURT_AH"))
+        self.playSoundEffect("DOT_HURT_AH")
     }
     
     func captured() {
-        self.runAction(motions.playSound("DOT_CAUGHT"))
-        self.runAction(motions.playSound("DOT_SCREAM_CAPTURE"))
-        //self.runAction(motions.playSound("DOT_SCREAM_TANK"))
+        self.playSoundEffect("DOT_CAUGHT")
+        self.playSoundEffect("DOT_SCREAM_CAPTURE")
+        //self.playSoundEffect("DOT_SCREAM_TANK")
     }
     
     func stop() {
         self.removeAllActions()
+        self.stopAllSoundEffect()
+    }
+    
+    func playSoundEffect(key: String) {
+        var player: RDRAudioPlayer
+        if (soundEffects.keys.contains(key)) {
+            player = soundEffects[key]!
+        } else {
+            player = RDRAudioPlayer(filename: key, num: 0)
+            player.setVolume(constants.soundVolume)
+            soundEffects[key] = player
+        }
+        player.playMusic()
+    }
+    
+    func stopSoundEffect(key: String) {
+        if (soundEffects.keys.contains(key)) {
+            let player = soundEffects[key]!
+            player.stopMusic()
+        }
+    }
+    
+    func stopAllSoundEffect() {
+        for player in soundEffects.values {
+            player.stopMusic()
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -38,7 +38,9 @@ class RDRMotions {
         return SKAction.animateWithTextures(gifTextures, timePerFrame: 0.250)
     }
 
+/*
     func playSound(fileName: String) -> SKAction {
         return SKAction.playSoundFileNamed("SOUNDS/" + fileName + ".wav", waitForCompletion: false)
     }
+*/
 }

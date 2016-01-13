@@ -17,9 +17,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var constants = RDRConstants()
     var motions = RDRMotions()
-    let musicPlayer = RDRAudioPlayer(filename: "MUSIC")
-    let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY")
-    let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT")
+    let musicPlayer = RDRAudioPlayer(filename: "MUSIC", num: -1)
+    let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY", num: -1)
+    let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT", num: -1)
     let touchHandler = RDRGameTouchHandler()
     let data = RDRGameData()
     
@@ -194,7 +194,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let t = RDRGameTouch(loc: touch.locationInNode(self), t: touch.timestamp)
                     let jumpRatio = touchHandler.computeLine(t)
                     print("Ratio" + jumpRatio.description)
-                    dot.jump(jumpRatio)
+                    if (jumpRatio != 1) {
+                        dot.jump(jumpRatio)
+                    }
                 }
             }
         }

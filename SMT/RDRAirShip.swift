@@ -12,6 +12,7 @@ import SpriteKit
 class RDRAirShip: SKSpriteNode {
     var constants = RDRConstants()
     var motions = RDRMotions()
+    var soundEffects = [String: RDRAudioPlayer]()
     
     init() {
         let ship_closed = SKTexture(imageNamed: "AIRSHIP_CLOSED")
@@ -29,59 +30,85 @@ class RDRAirShip: SKSpriteNode {
     
     func open() {
         self.runAction(SKAction.sequence([motions.playGifForOnce("AIRSHIP_OPEN", frames: constants.motionMap["OPEN"]!), motions.playGif("AIRSHIP_IDLE", frames: constants.motionMap["IDLE"]!)]))
-        self.runAction(motions.playSound("AIRSHIP_OPEN"))
+        self.playSoundEffect("AIRSHIP_OPEN")
     }
     
     func moveRight() {
         self.runAction(motions.moveRight(constants.airShipSpeed))
         self.runAction(motions.playGif("AIRSHIP_IDLE", frames: constants.motionMap["IDLE"]!))
-        self.runAction(motions.playSound("AIRSHIP_FLY_BY"))
-        //self.runAction(motions.playSound("AIRSHIP_FLY_IN"))
-        //self.runAction(motions.playSound("AIRSHIP_FLY_AWAY"))
+        self.playSoundEffect("AIRSHIP_FLY_BY")
+        //self.playSoundEffect("AIRSHIP_FLY_IN")
+        //self.playSoundEffect("AIRSHIP_FLY_AWAY")
     }
     
     func close() {
         self.runAction(motions.playGif("AIRSHIP_CLOSE", frames: constants.motionMap["CLOSE"]!))
-        self.runAction(motions.playSound("AIRSHIP_CLOSE"))
+        self.playSoundEffect("AIRSHIP_CLOSE")
     }
     
     func capture() {
         self.runAction(motions.playGif("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!))
-        self.runAction(motions.playSound("AIRSHIP_CAPTURE"))
+        self.playSoundEffect("AIRSHIP_CAPTURE")
     }
     
     func noshipFishDown() {
         self.runAction(motions.playGif("AIRSHIP_NOSHIP_FISH_DOWN", frames: constants.motionMap["NOSHIP_FISH_DOWN"]!))
-        self.runAction(motions.playSound("AIRSHIP_FISH_DOWN"))
+        self.playSoundEffect("AIRSHIP_FISH_DOWN")
     }
     
     func noshipFishUp() {
         self.runAction(motions.playGif("AIRSHIP_NOSHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["NOSHIP_FISH_UP"]!))
-        self.runAction(motions.playSound("AIRSHIP_FISH_UP"))
+        self.playSoundEffect("AIRSHIP_FISH_UP")
     }
     
     func shipFishDown() {
         self.runAction(motions.playGif("AIRSHIP_SHIP_FISH_DOWN", frames: constants.motionMap["SHIP_FISH_DOWN"]!))
-        self.runAction(motions.playSound("AIRSHIP_FISH_DOWN"))
+        self.playSoundEffect("AIRSHIP_FISH_DOWN")
     }
     
     func shipFishUp() {
         self.runAction(motions.playGif("AIRSHIP_SHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["SHIP_FISH_UP"]!))
-        self.runAction(motions.playSound("AIRSHIP_FISH_UP"))
+        self.playSoundEffect("AIRSHIP_FISH_UP")
     }
     
     func reach() {
         self.runAction(motions.playGif("AIRSHIP_REACH", frames: constants.motionMap["REACH"]!))
-        self.runAction(motions.playSound("AIRSHIP_REACH"))
+        self.playSoundEffect("AIRSHIP_REACH")
     }
     // CLAW_REACH
     func retract() {
         self.runAction(motions.playGif("AIRSHIP_RETRACT", frames: constants.motionMap["RETRACT"]!))
-        self.runAction(motions.playSound("AIRSHIP_REACH"))
+        self.playSoundEffect("AIRSHIP_REACH")
     }
     
     func stop() {
         self.removeAllActions()
+        self.stopAllSoundEffect()
+    }
+    
+    func playSoundEffect(key: String) {
+        var player: RDRAudioPlayer
+        if (soundEffects.keys.contains(key)) {
+            player = soundEffects[key]!
+        } else {
+            player = RDRAudioPlayer(filename: key, num: 0)
+            player.setVolume(constants.soundVolume)
+            soundEffects[key] = player
+        }
+        player.playMusic()
+    }
+    
+    func stopSoundEffect(key: String) {
+        if (soundEffects.keys.contains(key)) {
+            let player = soundEffects[key]!
+            player.stopMusic()
+        }
+    }
+    
+    func stopAllSoundEffect() {
+        for player in soundEffects.values {
+            player.stopMusic()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

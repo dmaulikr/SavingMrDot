@@ -13,7 +13,7 @@ import SpriteKit
 class RDRAudioPlayer {
     var player: AVAudioPlayer!
     
-    init(filename: String) {
+    init(filename: String, num: Int) {
         let url = NSBundle.mainBundle().URLForResource("SOUNDS/" + filename, withExtension: "mp3")
         if (url == nil) {
             print("Can not find file")
@@ -30,7 +30,7 @@ class RDRAudioPlayer {
             return
         }
         
-        player.numberOfLoops = -1
+        player.numberOfLoops = num
         player.prepareToPlay()
     }
     
@@ -39,16 +39,20 @@ class RDRAudioPlayer {
     }
     
     func playMusic() {
-        player.play()
+        if (!player.playing) {
+            player.play()
+        }
     }
     
     func pauseMusic() {
-        player.pause()
+        if (player.playing) {
+            player.pause()
+        }
     }
     
     func stopMusic() {
-        player.stop()
-        
-        //SKAction.runBlock({self.player.play()})
+        if (player.playing) {
+            player.stop()
+        }
     }
 }
