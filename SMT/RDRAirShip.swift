@@ -42,32 +42,35 @@ class RDRAirShip: SKSpriteNode {
     }
     
     func close() {
-        self.runAction(motions.playGif("AIRSHIP_CLOSE", frames: constants.motionMap["CLOSE"]!))
+        self.runAction(motions.playGifForOnce("AIRSHIP_CLOSE", frames: constants.motionMap["CLOSE"]!))
         self.playSoundEffect("AIRSHIP_CLOSE")
     }
     
     func capture() {
-        self.runAction(motions.playGif("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!))
+        self.runAction(motions.playGifForOnce("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!))
         self.playSoundEffect("AIRSHIP_CAPTURE")
     }
     
     func noshipFishDown() {
-        self.runAction(motions.playGif("AIRSHIP_NOSHIP_FISH_DOWN", frames: constants.motionMap["NOSHIP_FISH_DOWN"]!))
+        self.stop()
+        self.runAction(motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_DOWN", frames: constants.motionMap["NOSHIP_FISH_DOWN"]!))
         self.playSoundEffect("AIRSHIP_FISH_DOWN")
     }
     
     func noshipFishUp() {
-        self.runAction(motions.playGif("AIRSHIP_NOSHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["NOSHIP_FISH_UP"]!))
+        self.runAction(motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["NOSHIP_FISH_UP"]!))
         self.playSoundEffect("AIRSHIP_FISH_UP")
     }
     
-    func shipFishDown() {
-        self.runAction(motions.playGif("AIRSHIP_SHIP_FISH_DOWN", frames: constants.motionMap["SHIP_FISH_DOWN"]!))
+    func shipFishDown(dotx: CGFloat) {
+        self.stop()
+        self.position.x = dotx
+        self.runAction(motions.playGifForOnce("AIRSHIP_SHIP_FISH_DOWN", frames: constants.motionMap["SHIP_FISH_DOWN"]!))
         self.playSoundEffect("AIRSHIP_FISH_DOWN")
     }
     
     func shipFishUp() {
-        self.runAction(motions.playGif("AIRSHIP_SHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["SHIP_FISH_UP"]!))
+        self.runAction(motions.playGifForOnce("AIRSHIP_SHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["SHIP_FISH_UP"]!))
         self.playSoundEffect("AIRSHIP_FISH_UP")
     }
     
@@ -77,7 +80,7 @@ class RDRAirShip: SKSpriteNode {
     }
     // CLAW_REACH
     func retract() {
-        self.runAction(motions.playGif("AIRSHIP_RETRACT", frames: constants.motionMap["RETRACT"]!))
+        self.runAction(motions.playGifForOnce("AIRSHIP_RETRACT", frames: constants.motionMap["RETRACT"]!))
         self.playSoundEffect("AIRSHIP_REACH")
     }
     

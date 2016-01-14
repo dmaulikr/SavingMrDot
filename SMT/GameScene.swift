@@ -257,8 +257,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func gameOver() {
         self.isGameOver = true
         
-        dot.stop()
-        ship.stop()
+        //dot.stop()
+        //ship.stop()
         self.removeAllActions()
         
         let gameOverLabel = SKLabelNode(fontNamed: constants.gameFont)
@@ -297,9 +297,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         } else {
             if (contact.bodyA.node?.name == "airship" || contact.bodyB.node?.name == "airship") {
+                if (contact.bodyA.node?.name == "dot" || contact.bodyB.node?.name == "dot") {
+                    
+                }
                 
             } else {
                 if (contact.bodyA.node?.name == "dot" || contact.bodyB.node?.name == "dot") {
+                    if (contact.bodyA.node?.name == "obstacle_hole" || contact.bodyB.node?.name == "obstacle_hole") {
+                        dot.fall()
+                        ship.shipFishDown(dot.position.x)
+                    }
+                    if (contact.bodyA.node?.name == "obstacle_rock" || contact.bodyB.node?.name == "obstacle_rock") {
+                        dot.hurt()
+                        ship.shipFishDown(dot.position.x)
+                    }
+                    if (contact.bodyA.node?.name == "obstacle_firing" || contact.bodyB.node?.name == "obstacle_firing") {
+                        dot.burn()
+                        ship.shipFishDown(dot.position.x)
+                    }
                     self.gameOver()
                 }
             }

@@ -108,8 +108,7 @@ class RDRConstants {
 //self.backgroundColor = SKColor.colorWithAlphaComponent()
 //let dot = self.childNodeWithName("dot") as! RDRDot
 //pointsLabel.removeFromParent()
-//constants.gameDN.uppercaseString
 
-// All Contacts
 // MENU
+// Refine all Contacts
 // video: https://youtu.be/IfOKH5kVLGo

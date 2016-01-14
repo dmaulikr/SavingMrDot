@@ -59,23 +59,28 @@ class RDRDot: SKSpriteNode {
     }
     
     func burn() {
+        self.stop()
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Burn", frames: constants.motionMap["Burn"]!))
         self.playSoundEffect("DOT_BURN")
     }
     
     func fall() {
+        self.stop()
         self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Fall", frames: constants.motionMap["Fall"]!))
         self.playSoundEffect("DOT_FALL")
     }
     
-    func hurtBefore() {
-        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!))
-        self.playSoundEffect("DOT_HURT")
-    }
-    
-    func hurtAfter() {
-        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!))
-        self.playSoundEffect("DOT_HURT_AH")
+    func hurt() {
+        self.stop()
+        self.runAction(SKAction.sequence([
+            motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!),
+            motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!)]))
+        let rand = arc4random() % 2
+        if (rand == 0) {
+            self.playSoundEffect("DOT_HURT")
+        } else {
+            self.playSoundEffect("DOT_HURT_AH")
+        }
     }
     
     func captured() {
