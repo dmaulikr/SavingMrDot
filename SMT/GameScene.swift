@@ -257,10 +257,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func gameOver() {
         self.isGameOver = true
         
-        //dot.stop()
-        //ship.stop()
-        self.removeAllActions()
-        
         let gameOverLabel = SKLabelNode(fontNamed: constants.gameFont)
         gameOverLabel.text = "Game Over"
         gameOverLabel.position = CGPointMake(0, 60)
@@ -303,17 +299,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
             } else {
                 if (contact.bodyA.node?.name == "dot" || contact.bodyB.node?.name == "dot") {
+                    dot.stop()
+                    ship.stop()
+                    self.removeAllActions()
+                    
                     if (contact.bodyA.node?.name == "obstacle_hole" || contact.bodyB.node?.name == "obstacle_hole") {
-                        dot.fall()
-                        ship.shipFishDown(dot.position.x)
+                        world.runAction(SKAction.sequence([
+                            SKAction.runAction(dot.fall(), onChildWithName: "dot"),
+                            SKAction.waitForDuration(2),
+                            SKAction.runAction(ship.shipFish(dot.position.x), onChildWithName: "airship")
+                                ]))
+                        dot.playSoundEffect("DOT_FALL")
+                        //ship.playSoundEffect("AIRSHIP_FISH_DOWN")
                     }
                     if (contact.bodyA.node?.name == "obstacle_rock" || contact.bodyB.node?.name == "obstacle_rock") {
-                        dot.hurt()
-                        ship.shipFishDown(dot.position.x)
+                        world.runAction(SKAction.sequence([
+                            SKAction.runAction(dot.hurt(), onChildWithName: "dot"),
+                            SKAction.waitForDuration(2),
+                            SKAction.runAction(ship.shipFish(dot.position.x), onChildWithName: "airship")
+                            ]))
+                        let rand = arc4random() % 2
+                        if (rand == 0) {
+                            dot.playSoundEffect("DOT_HURT")
+                        } else {
+                            dot.playSoundEffect("DOT_HURT_AH")
+                        }
+                        //ship.playSoundEffect("AIRSHIP_FISH_DOWN")
                     }
                     if (contact.bodyA.node?.name == "obstacle_firing" || contact.bodyB.node?.name == "obstacle_firing") {
-                        dot.burn()
-                        ship.shipFishDown(dot.position.x)
+                        world.runAction(SKAction.sequence([
+                            SKAction.runAction(dot.burn(), onChildWithName: "dot"),
+                            SKAction.waitForDuration(2),
+                            SKAction.runAction(ship.shipFish(dot.position.x), onChildWithName: "airship")
+                            ]))
+                        dot.playSoundEffect("DOT_BURN")
+                        //ship.playSoundEffect("AIRSHIP_FISH_DOWN")
                     }
                     self.gameOver()
                 }

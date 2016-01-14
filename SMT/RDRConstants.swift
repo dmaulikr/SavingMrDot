@@ -34,7 +34,7 @@ class RDRConstants {
     let pointPosition = CGPointMake(-150, 70)
     let initObstacleX = CGFloat(200)
     
-    let dotSize = CGSizeMake(80, 80)
+    let dotSize = CGSizeMake(25, 25)
     let dotPhysicsBodyWidthRatio = CGFloat(0.56)
     let dotPhysicsBodyHeightRatio = CGFloat(0.80)
     
@@ -66,7 +66,7 @@ class RDRConstants {
     let gameFont = "Helvetica" // AmericanTypewriter-Bold
     let textSize = CGFloat(20)
     
-    let jumpVec = Double(100)
+    let jumpVec = Double(10)
     let dotSpeed = Double(150)
     let dotHorizonSpeed = Double(50)
     let airShipSpeed = Double(120)

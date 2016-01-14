@@ -51,31 +51,28 @@ class RDRAirShip: SKSpriteNode {
         self.playSoundEffect("AIRSHIP_CAPTURE")
     }
     
-    func noshipFishDown() {
-        self.stop()
-        self.runAction(motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_DOWN", frames: constants.motionMap["NOSHIP_FISH_DOWN"]!))
-        self.playSoundEffect("AIRSHIP_FISH_DOWN")
+    func noshipFishDown() -> SKAction {
+        return motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_DOWN", frames: constants.motionMap["NOSHIP_FISH_DOWN"]!)
     }
     
-    func noshipFishUp() {
-        self.runAction(motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["NOSHIP_FISH_UP"]!))
-        self.playSoundEffect("AIRSHIP_FISH_UP")
+    func noshipFishUp() -> SKAction {
+        return motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["NOSHIP_FISH_UP"]!)
+        //self.playSoundEffect("AIRSHIP_FISH_UP")
     }
     
-    func shipFishDown(dotx: CGFloat) {
-        self.stop()
-        self.position.x = dotx
-        self.runAction(motions.playGifForOnce("AIRSHIP_SHIP_FISH_DOWN", frames: constants.motionMap["SHIP_FISH_DOWN"]!))
-        self.playSoundEffect("AIRSHIP_FISH_DOWN")
-    }
-    
-    func shipFishUp() {
-        self.runAction(motions.playGifForOnce("AIRSHIP_SHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["SHIP_FISH_UP"]!))
-        self.playSoundEffect("AIRSHIP_FISH_UP")
+    func shipFish(dotx: CGFloat) -> SKAction {
+        //self.playSoundEffect("AIRSHIP_FISH_DOWN")
+        return SKAction.sequence([
+            SKAction.moveByX(dotx - self.position.x - 37, y: 0, duration: 1.0 / constants.airShipSpeed),
+            motions.playGifForOnce("AIRSHIP_REACH", frames: constants.motionMap["REACH"]!),
+            motions.playGifForOnce("AIRSHIP_SHIP_FISH_DOWN", frames: constants.motionMap["SHIP_FISH_DOWN"]!),
+            motions.playGifForOnce("AIRSHIP_SHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["SHIP_FISH_UP"]!),
+            motions.playGifForOnce("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!)
+            ])
     }
     
     func reach() {
-        self.runAction(motions.playGif("AIRSHIP_REACH", frames: constants.motionMap["REACH"]!))
+        self.runAction(motions.playGifForOnce("AIRSHIP_REACH", frames: constants.motionMap["REACH"]!))
         self.playSoundEffect("AIRSHIP_REACH")
     }
     // CLAW_REACH
