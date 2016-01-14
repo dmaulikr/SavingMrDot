@@ -40,7 +40,7 @@ class RDRWorldGenerator: SKNode {
         for _ in 1...3 {
             generateHiddenGround()
             generateForeBackGround()
-            generateObstacle()
+            generateObstacle(0)
         }
     }
     
@@ -96,8 +96,8 @@ class RDRWorldGenerator: SKNode {
         print(currentBackGroundX)
     }
     
-    func generateObstacle() {
-        world.addChild(obstacleGenerator.generate())
+    func generateObstacle(p: Int) {
+        world.addChild(obstacleGenerator.generate(p))
     }
     
     required init?(coder aDecoder: NSCoder) {

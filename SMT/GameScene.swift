@@ -131,20 +131,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.world.enumerateChildNodesWithName("obstacle_hole") { node, stop in
             if (node.position.x < self.dot.position.x) {
                 node.name = "obstacle_cancelled"
-                self.generator.generateObstacle()
+                let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
+                self.generator.generateObstacle(pl.getPoints())
             }
         }
         self.world.enumerateChildNodesWithName("obstacle_rock") { node, stop in
             if (node.position.x < self.dot.position.x) {
                 node.name = "obstacle_cancelled"
-                self.generator.generateObstacle()
+                let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
+                self.generator.generateObstacle(pl.getPoints())
             }
         }
         self.world.enumerateChildNodesWithName("obstacle_fire_passed") { node, stop in
             if (node.position.x < self.dot.position.x - self.frame.width) {
                 node.name = "obstacle_cancelled"
-                node.removeAllActions()
-                self.generator.generateObstacle()
+                //node.removeAllActions()
+                let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
+                self.generator.generateObstacle(pl.getPoints())
             }
         }
         if (self.dot.position.x > generator.currentGroundX - self.frame.width * 3) {

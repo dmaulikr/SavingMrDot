@@ -71,6 +71,11 @@ class RDRConstants {
     let dotHorizonSpeed = Double(50)
     let airShipSpeed = Double(120)
     
+    let y2 = 600
+    let y1 = 300
+    let alpha = 6
+    let step = Int(8)
+    
     let motionMap = [
         "Run"              : 9,
         "Fall"             : 9,
@@ -106,6 +111,5 @@ class RDRConstants {
 //constants.gameDN.uppercaseString
 
 // All Contacts
-
 // MENU
 // video: https://youtu.be/IfOKH5kVLGo

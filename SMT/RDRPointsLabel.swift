@@ -32,6 +32,10 @@ class RDRPointsLabel: SKLabelNode {
         self.text = String(number)
     }
     
+    func getPoints() -> Int {
+        return self.number
+    }
+    
     func reset() {
         number = 0
         self.text = String(number)
