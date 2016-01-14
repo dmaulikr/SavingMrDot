@@ -91,6 +91,7 @@ class RDRWorldGenerator: SKNode {
         world.addChild(ground)
         currentGroundX += ground.frame.size.width
         
+        obstacleGenerator.setGroundWidth(length / 2)
         print(currentGroundX)
         print(currentBackGroundX)
     }
@@ -98,7 +99,7 @@ class RDRWorldGenerator: SKNode {
     func generateObstacle() {
         world.addChild(obstacleGenerator.generate())
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

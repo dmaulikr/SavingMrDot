@@ -11,11 +11,12 @@ import SpriteKit
 
 class RDRConstants {
     var dotName = "JEAN" // CAPTAIN ZIPPY
-    var gameDN = "day" // night
     var musicVolume = Float(0.08)
     var backgroundVolume = Float(0.5)
     var soundVolume = Float(0.9)
     var difficulty = Float(0.5)
+    
+    var gameDN = "day" // night
     
     let dotCategory = UInt32(0x1 << 0)
     let obstacleCategory = UInt32(0x1 << 1)
@@ -36,10 +37,30 @@ class RDRConstants {
     let dotSize = CGSizeMake(80, 80)
     let dotPhysicsBodyWidthRatio = CGFloat(0.56)
     let dotPhysicsBodyHeightRatio = CGFloat(0.80)
+    
     let airShipSize = CGSizeMake(316, 200)
     let airShipPhysicsBodyWidthRatio = CGFloat(0.10)
     let airShipPhysicsBodyHeightRatio = CGFloat(0.10)
-    let obstacleSize = CGSizeMake(20, 40)
+    
+    let holeSize = CGSizeMake(50, 20)
+    let holePhysicsBodyWidthRatio = CGFloat(0.3)
+    
+    let rockBigSize = CGSizeMake(40, 60)
+    let rockBigPhysicsBodyWidthRatio = CGFloat(0.9)
+    let rockBigPhysicsBodyHeightRatio = CGFloat(0.8)
+    
+    let rockMediumSize = CGSizeMake(40, 40)
+    let rockMediumPhysicsBodyWidthRatio = CGFloat(0.8)
+    let rockMediumPhysicsBodyHeightRatio = CGFloat(0.8)
+    
+    let rockSmallSize = CGSizeMake(40, 30)
+    let rockSmallPhysicsBodyWidthRatio = CGFloat(0.7)
+    let rockSmallPhysicsBodyHeightRatio = CGFloat(0.8)
+    
+    let fireSize = CGSizeMake(30, 72)
+    let firePhysicsBodyWidthRatio = CGFloat(0.7)
+    let firePhysicsBodyHeightRatio = CGFloat(0.4)
+    
     let hiddengroundHeight = CGFloat(10)
     
     let gameFont = "Helvetica" // AmericanTypewriter-Bold
@@ -84,8 +105,7 @@ class RDRConstants {
 //pointsLabel.removeFromParent()
 //constants.gameDN.uppercaseString
 
+// All Contacts
 
-// video: https://youtu.be/IfOKH5kVLGo
-
-// Obstacle
 // MENU
+// video: https://youtu.be/IfOKH5kVLGo

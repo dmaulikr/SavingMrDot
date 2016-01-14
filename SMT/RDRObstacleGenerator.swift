@@ -11,9 +11,12 @@ import SpriteKit
 
 class RDRObstacleGenerator {
     let constants = RDRConstants()
+    var motions = RDRMotions()
     
     var currentObstacleX = CGFloat(0)
     var screenHeight = CGFloat(0)
+    var groundWidth = CGFloat(0)
+    var threshold = 0
     
     init() {
         currentObstacleX = constants.initObstacleX
@@ -23,42 +26,37 @@ class RDRObstacleGenerator {
         screenHeight = h
     }
     
-    func generate() -> SKSpriteNode {
-        let obstacle = SKSpriteNode(color: self.getRandomColor(), size: constants.obstacleSize)
-        obstacle.position = CGPointMake(currentObstacleX, -screenHeight/2 + constants.hiddengroundHeight + obstacle.frame.size.height/2)
-        obstacle.physicsBody = SKPhysicsBody(rectangleOfSize: obstacle.size)
-        obstacle.physicsBody?.categoryBitMask = constants.obstacleCategory
-        obstacle.physicsBody?.dynamic = false
-        obstacle.name = "obstacle"
-        currentObstacleX += 600
-        return obstacle
+    func setGroundWidth(l: CGFloat) {
+        groundWidth = l
     }
     
-    func getRandomColor() -> UIColor {
-        let rand = arc4random() % 6
-        var color = UIColor()
-        switch (rand) {
-        case 0:
-            color = UIColor.redColor()
-            break
-        case 1:
-            color = UIColor.orangeColor()
-            break
-        case 2:
-            color = UIColor.yellowColor()
-            break
-        case 3:
-            color = UIColor.greenColor()
-            break
-        case 4:
-            color = UIColor.purpleColor()
-            break
-        case 5:
-            color = UIColor.blueColor()
-            break
-        default:
-            break
+    func updateGameDN() {
+        if (currentObstacleX < 3 * groundWidth) {
+            constants.gameDN = "day"
+        } else {
+            var p = (currentObstacleX - 3 * groundWidth) / (6 * groundWidth)
+            if (p == CGFloat(threshold)) {
+                currentObstacleX += 50
+                p = (currentObstacleX - 3 * groundWidth) / (6 * groundWidth)
+            }
+            if (p > CGFloat(threshold)) {
+                if (threshold % 2 == 0) {
+                    constants.gameDN = "night"
+                } else {
+                    constants.gameDN = "day"
+                }
+                threshold++
+            }
         }
-        return color
     }
+    
+    func generate() -> SKSpriteNode {
+        self.updateGameDN()
+        
+        let rand = arc4random() % 5
+        let obstacle = RDRObstacle(rand: rand, currentObstacleX: currentObstacleX, screenHeight: screenHeight, gameTime: constants.gameDN)
+        
+        currentObstacleX += 600
+        return obstacle
+    }    
 }

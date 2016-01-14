@@ -97,6 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.handleGeneration()
         self.handleCleanUp()
         self.handleBackgroundMusic()
+        self.handleObstacleFire()
     }
     
     func centerOnNode(node: SKNode) {
@@ -105,8 +106,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func handlePoints() {
-        self.world.enumerateChildNodesWithName("obstacle") { node, stop in
+        self.world.enumerateChildNodesWithName("obstacle_hole") { node, stop in
             if (node.position.x < self.dot.position.x) {
+                let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
+                pl.increment()
+            }
+        }
+        self.world.enumerateChildNodesWithName("obstacle_rock") { node, stop in
+            if (node.position.x < self.dot.position.x) {
+                let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
+                pl.increment()
+            }
+        }
+        self.world.enumerateChildNodesWithName("obstacle_firing") { node, stop in
+            if (node.position.x < self.dot.position.x) {
+                node.name = "obstacle_fire_passed"
                 let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
                 pl.increment()
             }
@@ -114,9 +128,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func handleGeneration() {
-        self.world.enumerateChildNodesWithName("obstacle") { node, stop in
+        self.world.enumerateChildNodesWithName("obstacle_hole") { node, stop in
             if (node.position.x < self.dot.position.x) {
                 node.name = "obstacle_cancelled"
+                self.generator.generateObstacle()
+            }
+        }
+        self.world.enumerateChildNodesWithName("obstacle_rock") { node, stop in
+            if (node.position.x < self.dot.position.x) {
+                node.name = "obstacle_cancelled"
+                self.generator.generateObstacle()
+            }
+        }
+        self.world.enumerateChildNodesWithName("obstacle_fire_passed") { node, stop in
+            if (node.position.x < self.dot.position.x - self.frame.width) {
+                node.name = "obstacle_cancelled"
+                node.removeAllActions()
                 self.generator.generateObstacle()
             }
         }
@@ -170,6 +197,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     dayPlayer.playMusic()
                 }
                 threshold++
+            }
+        }
+    }
+    
+    func handleObstacleFire() {
+        self.world.enumerateChildNodesWithName("obstacle_fire") { node, stop in
+            if (node.position.x < self.dot.position.x + self.frame.width) {
+                let obstacleFire = node as! RDRObstacle
+                obstacleFire.startFire()
+                node.name = "obstacle_firing"
             }
         }
     }
@@ -259,7 +296,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (contact.bodyA.node?.name == "airship" || contact.bodyB.node?.name == "airship") {
                 
             } else {
-                self.gameOver()
+                if (contact.bodyA.node?.name == "dot" || contact.bodyB.node?.name == "dot") {
+                    self.gameOver()
+                }
             }
         }
     }
