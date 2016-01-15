@@ -58,26 +58,34 @@ class RDRDot: SKSpriteNode {
         isJumping = false
     }
     
-    func burn() -> SKAction {
-        return SKAction.sequence([
+    func burn() {
+        self.playSoundEffect("DOT_FALL")
+        self.runAction(SKAction.sequence([
             motions.playGifForOnce("DOT_" + constants.dotName + "_Burn", frames: constants.motionMap["Burn"]!),
-            SKAction.fadeOutWithDuration(0.1)
-            ])
+            SKAction.fadeOutWithDuration(constants.dotFadeOutTime)
+            ]))
     }
     
-    func fall() -> SKAction {
-        return SKAction.sequence([
+    func fall() {
+        self.playSoundEffect("DOT_FALL")
+        self.runAction(SKAction.sequence([
             motions.playGifForOnce("DOT_" + constants.dotName + "_Fall", frames: constants.motionMap["Fall"]!),
-            SKAction.fadeOutWithDuration(0.1)
-            ])
+            SKAction.fadeOutWithDuration(constants.dotFadeOutTime)
+            ]))
     }
     
-    func hurt() -> SKAction {
-        return SKAction.sequence([
+    func hurt() {
+        let rand = arc4random() % 2
+        if (rand == 0) {
+            self.playSoundEffect("DOT_HURT")
+        } else {
+            self.playSoundEffect("DOT_HURT_AH")
+        }
+        self.runAction(SKAction.sequence([
             motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!),
             motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!),
-            SKAction.fadeOutWithDuration(0.1)
-            ])
+            SKAction.fadeOutWithDuration(constants.dotFadeOutTime)
+            ]))
     }
     
     func captured() {

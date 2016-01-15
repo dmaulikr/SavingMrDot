@@ -22,6 +22,10 @@ class RDRMotions {
         return SKAction.repeatActionForever(incrementalRight)
     }
     
+    func moveAway() -> SKAction {
+        return SKAction.moveByX(400, y: 0, duration: 5)
+    }
+    
     func playGif(fileName: String, frames: Int) -> SKAction {
         var gifTextures: [SKTexture] = []
         for i in 0...frames {

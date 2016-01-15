@@ -38,7 +38,32 @@ class RDRAirShip: SKSpriteNode {
         self.runAction(motions.playGif("AIRSHIP_IDLE", frames: constants.motionMap["IDLE"]!))
         self.playSoundEffect("AIRSHIP_FLY_BY")
         //self.playSoundEffect("AIRSHIP_FLY_IN")
-        //self.playSoundEffect("AIRSHIP_FLY_AWAY")
+    }
+    
+    func noshipFishDown() {
+        self.playSoundEffect("AIRSHIP_FISH_DOWN")
+        self.runAction(motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_DOWN", frames: constants.motionMap["NOSHIP_FISH_DOWN"]!))
+    }
+    
+    func noshipFishUp() {
+        self.stopSoundEffect("AIRSHIP_FISH_DOWN")
+        self.playSoundEffect("AIRSHIP_FISH_UP")
+        self.runAction(motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["NOSHIP_FISH_UP"]!))
+    }
+    
+    func noshipFish(dotx: CGFloat) {
+        self.runAction(SKAction.sequence([
+            SKAction.moveByX(dotx - self.position.x, y: 0, duration: 0.01),
+            SKAction.runBlock({self.noshipFishDown()}),
+            SKAction.runBlock({self.noshipFishUp()}),
+            SKAction.waitForDuration(3), SKAction.fadeOutWithDuration(constants.airShipFadeOutTime)
+        ]))
+    }
+    
+    func flyAway() {
+        self.playSoundEffect("AIRSHIP_FLY_AWAY")
+        self.texture = SKTexture(imageNamed: "AIRSHIP_CLOSED")
+        self.runAction(motions.moveAway())
     }
     
     func close() {
@@ -46,29 +71,23 @@ class RDRAirShip: SKSpriteNode {
         self.playSoundEffect("AIRSHIP_CLOSE")
     }
     
-    func capture() {
-        self.runAction(motions.playGifForOnce("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!))
-        self.playSoundEffect("AIRSHIP_CAPTURE")
-    }
-    
-    func noshipFishDown() -> SKAction {
-        return motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_DOWN", frames: constants.motionMap["NOSHIP_FISH_DOWN"]!)
-    }
-    
-    func noshipFishUp() -> SKAction {
-        return motions.playGifForOnce("AIRSHIP_NOSHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["NOSHIP_FISH_UP"]!)
-        //self.playSoundEffect("AIRSHIP_FISH_UP")
-    }
-    
-    func shipFish(dotx: CGFloat) -> SKAction {
-        //self.playSoundEffect("AIRSHIP_FISH_DOWN")
-        return SKAction.sequence([
-            SKAction.moveByX(dotx - self.position.x - 37, y: 0, duration: 1.0 / constants.airShipSpeed),
+    func shipFish(dotx: CGFloat) {
+        self.playSoundEffect("AIRSHIP_FISH_DOWN")
+        self.runAction(SKAction.sequence([
+            SKAction.moveByX(dotx - self.position.x - constants.shipDotAlignCorrection, y: 0, duration: 1.0 / constants.airShipGameOverSpeed),
             motions.playGifForOnce("AIRSHIP_REACH", frames: constants.motionMap["REACH"]!),
             motions.playGifForOnce("AIRSHIP_SHIP_FISH_DOWN", frames: constants.motionMap["SHIP_FISH_DOWN"]!),
             motions.playGifForOnce("AIRSHIP_SHIP_FISH_UP_" + constants.dotName, frames: constants.motionMap["SHIP_FISH_UP"]!),
-            motions.playGifForOnce("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!)
-            ])
+            motions.playGifForOnce("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!),
+            SKAction.runBlock({self.close()}),
+            SKAction.runBlock({self.flyAway()})
+            ]))
+        
+    }
+    
+    func capture() {
+        self.runAction(motions.playGifForOnce("AIRSHIP_CAPTURE_" + constants.dotName, frames: constants.motionMap["CAPTURE"]!))
+        self.playSoundEffect("AIRSHIP_CAPTURE")
     }
     
     func reach() {

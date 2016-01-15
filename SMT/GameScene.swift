@@ -294,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             if (contact.bodyA.node?.name == "airship" || contact.bodyB.node?.name == "airship") {
                 if (contact.bodyA.node?.name == "dot" || contact.bodyB.node?.name == "dot") {
-                    
+                    //dot.capture()
                 }
                 
             } else {
@@ -303,41 +303,59 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     ship.stop()
                     self.removeAllActions()
                     
+                    var obstacleType = ""
                     if (contact.bodyA.node?.name == "obstacle_hole" || contact.bodyB.node?.name == "obstacle_hole") {
-                        world.runAction(SKAction.sequence([
-                            SKAction.runAction(dot.fall(), onChildWithName: "dot"),
-                            SKAction.waitForDuration(2),
-                            SKAction.runAction(ship.shipFish(dot.position.x), onChildWithName: "airship")
-                                ]))
-                        dot.playSoundEffect("DOT_FALL")
-                        //ship.playSoundEffect("AIRSHIP_FISH_DOWN")
+                        obstacleType = "hole"
                     }
                     if (contact.bodyA.node?.name == "obstacle_rock" || contact.bodyB.node?.name == "obstacle_rock") {
-                        world.runAction(SKAction.sequence([
-                            SKAction.runAction(dot.hurt(), onChildWithName: "dot"),
-                            SKAction.waitForDuration(2),
-                            SKAction.runAction(ship.shipFish(dot.position.x), onChildWithName: "airship")
-                            ]))
-                        let rand = arc4random() % 2
-                        if (rand == 0) {
-                            dot.playSoundEffect("DOT_HURT")
-                        } else {
-                            dot.playSoundEffect("DOT_HURT_AH")
-                        }
-                        //ship.playSoundEffect("AIRSHIP_FISH_DOWN")
+                        obstacleType = "rock"
                     }
                     if (contact.bodyA.node?.name == "obstacle_firing" || contact.bodyB.node?.name == "obstacle_firing") {
-                        world.runAction(SKAction.sequence([
-                            SKAction.runAction(dot.burn(), onChildWithName: "dot"),
-                            SKAction.waitForDuration(2),
-                            SKAction.runAction(ship.shipFish(dot.position.x), onChildWithName: "airship")
-                            ]))
-                        dot.playSoundEffect("DOT_BURN")
-                        //ship.playSoundEffect("AIRSHIP_FISH_DOWN")
+                        obstacleType = "fire"
                     }
+                    
+                    gameOverAnimation(obstacleType, isShipIn: self.isAirShipInScene())
                     self.gameOver()
                 }
             }
+        }
+    }
+    
+    func gameOverAnimation(type: String, isShipIn: Bool) {
+        var dotAction: SKAction
+        dotAction = SKAction.init()
+        if (type == "hole") {
+            dotAction = SKAction.runBlock({self.dot.fall()})
+        }
+        if (type == "rock") {
+            dotAction = SKAction.runBlock({self.dot.hurt()})
+        }
+        if (type == "fire") {
+            dotAction = SKAction.runBlock({self.dot.burn()})
+        }
+        
+        print(isShipIn)
+        var shipAction: SKAction
+        if (isShipIn) {
+            shipAction = SKAction.runBlock({self.ship.shipFish(self.dot.position.x)})
+        } else {
+            shipAction = SKAction.runBlock({self.ship.noshipFish(self.dot.position.x)})
+        }
+        
+        let timeGap = constants.timeGapMap[[type, isShipIn]]
+
+        world.runAction(SKAction.sequence([
+            dotAction,
+            SKAction.waitForDuration(timeGap!),
+            shipAction
+            ]))
+    }
+    
+    func isAirShipInScene() -> Bool {
+        if (ship.position.x + constants.shipInSceneCorrection < dot.position.x) {
+            return false
+        } else {
+            return true
         }
     }
 

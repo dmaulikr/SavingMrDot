@@ -69,7 +69,8 @@ class RDRObstacleGenerator {
         let y1_corrected = constants.y1 - constants.alpha * k
         let a = Double(y2_corrected - y1_corrected) / (1 - exp(Double(constants.step)))
         let b = Double(y2_corrected) - a
-        let gap = a * exp(Double(p)) + b
+        let x = p % constants.step
+        let gap = a * exp(Double(x)) + b
         print("Gap: " + gap.description)
         return gap
     }

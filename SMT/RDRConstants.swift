@@ -70,6 +70,12 @@ class RDRConstants {
     let dotSpeed = Double(150)
     let dotHorizonSpeed = Double(50)
     let airShipSpeed = Double(120)
+    let airShipGameOverSpeed = Double(6)
+    let dotFadeOutTime = Double(0.1)
+    let airShipFadeOutTime = Double(0.1)
+    
+    let shipInSceneCorrection = CGFloat(200)
+    let shipDotAlignCorrection = CGFloat(37)
     
     let y2 = 600
     let y1 = 300
@@ -101,9 +107,20 @@ class RDRConstants {
         "SHIP_FISH_UP"     : 4
     ]
     
+    let timeGapMap = [
+        ["hole", false]    : 2.0,
+        ["hole", true]     : 2.0,
+        ["rock", false]    : 2.0,
+        ["rock", true]     : 2.0,
+        ["fire", false]    : 2.0,
+        ["fire", true]     : 2.0,
+    ]
+    
     init() {
     }
 }
+
+// reach
 
 //self.backgroundColor = SKColor.colorWithAlphaComponent()
 //let dot = self.childNodeWithName("dot") as! RDRDot
