@@ -42,6 +42,12 @@ class RDRMotions {
         return SKAction.animateWithTextures(gifTextures, timePerFrame: 0.250)
     }
     
+    func playGifFromPNG(fileName: String, time: Double) -> SKAction {
+        var gifTextures: [SKTexture] = []
+        gifTextures.append(SKTexture(imageNamed: fileName))
+        return SKAction.animateWithTextures(gifTextures, timePerFrame: time)
+    }
+    
 /*
     func playSound(fileName: String) -> SKAction {
         return SKAction.playSoundFileNamed("SOUNDS/" + fileName + ".wav", waitForCompletion: false)

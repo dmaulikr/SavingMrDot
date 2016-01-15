@@ -108,12 +108,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func handlePoints() {
         self.world.enumerateChildNodesWithName("obstacle_hole") { node, stop in
             if (node.position.x < self.dot.position.x) {
+                node.name = "obstacle_hole_passed"
                 let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
                 pl.increment()
             }
         }
         self.world.enumerateChildNodesWithName("obstacle_rock") { node, stop in
             if (node.position.x < self.dot.position.x) {
+                node.name = "obstacle_rock_passed"
                 let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
                 pl.increment()
             }
@@ -128,15 +130,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func handleGeneration() {
-        self.world.enumerateChildNodesWithName("obstacle_hole") { node, stop in
-            if (node.position.x < self.dot.position.x) {
+        self.world.enumerateChildNodesWithName("obstacle_hole_passed") { node, stop in
+            if (node.position.x < self.dot.position.x - self.frame.width) {
                 node.name = "obstacle_cancelled"
                 let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
                 self.generator.generateObstacle(pl.getPoints())
             }
         }
-        self.world.enumerateChildNodesWithName("obstacle_rock") { node, stop in
-            if (node.position.x < self.dot.position.x) {
+        self.world.enumerateChildNodesWithName("obstacle_rock_passed") { node, stop in
+            if (node.position.x < self.dot.position.x - self.frame.width) {
                 node.name = "obstacle_cancelled"
                 let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
                 self.generator.generateObstacle(pl.getPoints())
@@ -145,7 +147,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.world.enumerateChildNodesWithName("obstacle_fire_passed") { node, stop in
             if (node.position.x < self.dot.position.x - self.frame.width) {
                 node.name = "obstacle_cancelled"
-                //node.removeAllActions()
                 let pl = self.childNodeWithName("pointsLabel") as! RDRPointsLabel
                 self.generator.generateObstacle(pl.getPoints())
             }
@@ -304,13 +305,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     self.removeAllActions()
                     
                     var obstacleType = ""
-                    if (contact.bodyA.node?.name == "obstacle_hole" || contact.bodyB.node?.name == "obstacle_hole") {
+                    if (contact.bodyA.node?.name == "obstacle_hole" || contact.bodyB.node?.name == "obstacle_hole" || contact.bodyA.node?.name == "obstacle_hole_passed" || contact.bodyB.node?.name == "obstacle_hole_passed") {
                         obstacleType = "hole"
                     }
-                    if (contact.bodyA.node?.name == "obstacle_rock" || contact.bodyB.node?.name == "obstacle_rock") {
+                    if (contact.bodyA.node?.name == "obstacle_rock" || contact.bodyB.node?.name == "obstacle_rock" || contact.bodyA.node?.name == "obstacle_rock_passed" || contact.bodyB.node?.name == "obstacle_rock_passed") {
                         obstacleType = "rock"
                     }
-                    if (contact.bodyA.node?.name == "obstacle_firing" || contact.bodyB.node?.name == "obstacle_firing") {
+                    if (contact.bodyA.node?.name == "obstacle_firing" || contact.bodyB.node?.name == "obstacle_firing" || contact.bodyA.node?.name == "obstacle_fire_passed" || contact.bodyB.node?.name == "obstacle_fire_passed") {
                         obstacleType = "fire"
                     }
                     

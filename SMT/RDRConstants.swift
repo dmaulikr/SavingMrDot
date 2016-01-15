@@ -120,8 +120,6 @@ class RDRConstants {
     }
 }
 
-// reach
-
 //self.backgroundColor = SKColor.colorWithAlphaComponent()
 //let dot = self.childNodeWithName("dot") as! RDRDot
 //pointsLabel.removeFromParent()
