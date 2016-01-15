@@ -39,8 +39,8 @@ class RDRConstants {
     let dotPhysicsBodyHeightRatio = CGFloat(0.80)
     
     let airShipSize = CGSizeMake(316, 200)
-    let airShipPhysicsBodyWidthRatio = CGFloat(0.10)
-    let airShipPhysicsBodyHeightRatio = CGFloat(0.10)
+    let airShipPhysicsBodyWidthRatio = CGFloat(0.20)
+    let airShipPhysicsBodyHeightRatio = CGFloat(2.0)
     
     let holeSize = CGSizeMake(50, 20)
     let holePhysicsBodyWidthRatio = CGFloat(0.3)

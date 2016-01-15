@@ -22,6 +22,7 @@ class RDRAirShip: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.size.width * constants.airShipPhysicsBodyWidthRatio, self.size.height * constants.airShipPhysicsBodyHeightRatio))
         self.physicsBody?.categoryBitMask = constants.airShipCategory
         self.physicsBody?.contactTestBitMask = constants.dotCategory | ~constants.obstacleCategory
+        self.physicsBody?.collisionBitMask = constants.dotCategory
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.angularVelocity = 0

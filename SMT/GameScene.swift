@@ -288,6 +288,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
+        if (isGameOver) {
+            return
+        }
+        
         if (contact.bodyA.node?.name == "hiddenground" || contact.bodyB.node?.name == "hiddenground") {
             if (dot.isJumping) {
                 dot.land()
@@ -295,7 +299,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             if (contact.bodyA.node?.name == "airship" || contact.bodyB.node?.name == "airship") {
                 if (contact.bodyA.node?.name == "dot" || contact.bodyB.node?.name == "dot") {
-                    //dot.capture()
+                    dot.stop()
+                    ship.stop()
+                    self.removeAllActions()
+                    
+                    world.runAction(SKAction.sequence([
+                        SKAction.runBlock({self.ship.shipFish(self.dot.position.x)}),
+                        SKAction.waitForDuration(4),
+                        SKAction.runBlock({self.dot.captured()}),
+                    ]))
+                    self.gameOver()
                 }
                 
             } else {
@@ -315,14 +328,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         obstacleType = "fire"
                     }
                     
-                    gameOverAnimation(obstacleType, isShipIn: self.isAirShipInScene())
+                    obstacleCollisionAnimation(obstacleType, isShipIn: self.isAirShipInScene())
                     self.gameOver()
                 }
             }
         }
     }
     
-    func gameOverAnimation(type: String, isShipIn: Bool) {
+    func obstacleCollisionAnimation(type: String, isShipIn: Bool) {
         var dotAction: SKAction
         dotAction = SKAction.init()
         if (type == "hole") {

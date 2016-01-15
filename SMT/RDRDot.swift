@@ -89,7 +89,10 @@ class RDRDot: SKSpriteNode {
     }
     
     func captured() {
-        self.playSoundEffect("DOT_CAUGHT")
+        self.runAction(SKAction.sequence([
+            motions.playGifFromPNG("DOT_" + constants.dotName + "_STAND", time: 3),
+            SKAction.fadeOutWithDuration(constants.dotFadeOutTime)
+            ]))
         self.playSoundEffect("DOT_SCREAM_CAPTURE")
         //self.playSoundEffect("DOT_SCREAM_TANK")
     }
