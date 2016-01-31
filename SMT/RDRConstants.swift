@@ -127,3 +127,5 @@ class RDRConstants {
 // MENU
 // Refine all Contacts
 // video: https://youtu.be/IfOKH5kVLGo
+
+// Share + Wind + Vibration
