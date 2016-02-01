@@ -137,3 +137,4 @@ var constants = RDRConstants()
 // test on otehr devices
 
 // Share + Wind + Vibration
+// Ad: https://developer.apple.com/iad/monetize/

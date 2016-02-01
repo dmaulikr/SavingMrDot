@@ -34,22 +34,6 @@
                     <view key="view" contentMode="scaleToFill" id="Ikh-SC-tjA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9V0-7j-FOS">
-                                <rect key="frame" x="466" y="61" width="71" height="30"/>
-                                <state key="normal" title="Play Again"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="m6L-UI-YM5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqM-fl-fVN">
-                                <rect key="frame" x="208" y="364" width="34" height="30"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <segue destination="9zd-3E-gGg" kind="show" id="oid-0L-FNP"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>

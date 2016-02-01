@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var viewController: GameViewController!
+    
     var isStarted = false
     var isGameOver = false
     
@@ -247,8 +249,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func clear() {
-        let scene = GameScene.init(size: CGSizeMake(self.frame.size.width, self.frame.size.width / 16 * 9))
-        self.view?.presentScene(scene)
+        self.updateHighScore()
+        constants.musicPlayer.stopMusic()
+        dayPlayer.stopMusic()
+        nightPlayer.stopMusic()
+        dot.stop()
+        ship.stop()
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("GameOverMenu") as! RDRMenuViewController
+        self.viewController.presentViewController(nextViewController, animated:true, completion:nil)
     }
     
     func gameOver() {
