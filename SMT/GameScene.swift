@@ -16,7 +16,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var threshold = 0
     
     var motions = RDRMotions()
-    let musicPlayer = RDRAudioPlayer(filename: "MUSIC", num: -1)
     let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY", num: -1)
     let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT", num: -1)
     let touchHandler = RDRGameTouchHandler()
@@ -54,10 +53,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.loadTapToBeginLabel()
         
-        musicPlayer.setVolume(constants.musicVolume)
         dayPlayer.setVolume(constants.backgroundVolume)
         nightPlayer.setVolume(constants.backgroundVolume)
-        musicPlayer.playMusic()
     }
     
     func loadScoreLabels() {
@@ -271,7 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.updateHighScore()
         
-        musicPlayer.stopMusic()
+        constants.musicPlayer.stopMusic()
         dayPlayer.stopMusic()
         nightPlayer.stopMusic()
     }

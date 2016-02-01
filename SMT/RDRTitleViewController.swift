@@ -11,7 +11,6 @@ import SpriteKit
 
 class RDRTitleViewController: UIViewController {
     var soundEffects = [String: RDRAudioPlayer]()
-    let musicPlayer = RDRAudioPlayer(filename: "MUSIC", num: -1)
     
     func addBackground() {
         let width = UIScreen.mainScreen().bounds.size.width
@@ -48,20 +47,12 @@ class RDRTitleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addBackground()
-        print(musicPlayer.player.playing)
-        if (!musicPlayer.player.playing) {
-            musicPlayer.setVolume(constants.musicVolume)
-            musicPlayer.playMusic()
-        }
+        constants.musicPlayer.playMusic()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         moveImage(view.viewWithTag(1) as! UIImageView)
-        //if (musicPlayer.player.playing) {
-            //musicPlayer.setVolume(constants.musicVolume)
-            //musicPlayer.playMusic()
-        //}
     }
 
     func moveImage(view: UIImageView){

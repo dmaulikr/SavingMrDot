@@ -116,7 +116,10 @@ class RDRConstants {
         ["fire", true]     : 2.0,
     ]
     
+    let musicPlayer = RDRAudioPlayer(filename: "MUSIC", num: -1)
+    
     init() {
+        musicPlayer.setVolume(musicVolume)
     }
 }
 
