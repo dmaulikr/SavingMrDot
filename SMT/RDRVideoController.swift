@@ -15,21 +15,25 @@ import MediaPlayer
 
 class RDRVideoController: UIViewController {
     func playVideo() {
-        let videoURL = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
-        let player = AVPlayer(URL: videoURL!)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        self.presentViewController(playerViewController, animated: true) {
-            playerViewController.player!.play()
-        }
-    }
-    
-    func playVideo2(screen: SKView) {
-        let videoURL = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
-        let player = AVPlayer(URL: videoURL!)
+        let url = NSBundle.mainBundle().URLForResource("GAME_OPENER", withExtension: "mp4")
+        let item = AVPlayerItem(URL: url!)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: item)
+        let player = AVPlayer(playerItem: item)
+        
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.view.bounds
         self.view.layer.addSublayer(playerLayer)
         player.play()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.playVideo()
+    }
+    
+    func playerDidFinishPlaying(note: NSNotification) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("TitleMenu") as! RDRTitleViewController
+        self.presentViewController(nextViewController, animated:true, completion:nil)
     }
 }

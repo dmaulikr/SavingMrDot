@@ -132,8 +132,7 @@ var constants = RDRConstants()
 //button.backgroundColor = UIColor.greenColor()
 
 // Refine all Contacts
-// video: https://youtu.be/IfOKH5kVLGo
 // test on otehr devices
 
-// Share + Wind + Vibration
+// Share + Wind + Vibration + hero (bigger)
 // Ad: https://developer.apple.com/iad/monetize/
