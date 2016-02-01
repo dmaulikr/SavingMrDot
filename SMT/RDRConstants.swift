@@ -120,12 +120,16 @@ class RDRConstants {
     }
 }
 
+var constants = RDRConstants()
+
 //self.backgroundColor = SKColor.colorWithAlphaComponent()
 //let dot = self.childNodeWithName("dot") as! RDRDot
 //pointsLabel.removeFromParent()
+//self.view.sendSubviewToBack(cloud)
 
 // MENU
 // Refine all Contacts
 // video: https://youtu.be/IfOKH5kVLGo
+// test on otehr devices
 
 // Share + Wind + Vibration

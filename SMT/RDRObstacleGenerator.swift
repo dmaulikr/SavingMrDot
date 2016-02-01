@@ -10,7 +10,6 @@ import Foundation
 import SpriteKit
 
 class RDRObstacleGenerator {
-    let constants = RDRConstants()
     var motions = RDRMotions()
     
     var currentObstacleX = CGFloat(0)

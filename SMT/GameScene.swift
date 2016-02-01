@@ -15,7 +15,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var threshold = 0
     
-    var constants = RDRConstants()
     var motions = RDRMotions()
     let musicPlayer = RDRAudioPlayer(filename: "MUSIC", num: -1)
     let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY", num: -1)

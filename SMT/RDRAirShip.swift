@@ -10,7 +10,6 @@ import UIKit
 import SpriteKit
 
 class RDRAirShip: SKSpriteNode {
-    var constants = RDRConstants()
     var motions = RDRMotions()
     var soundEffects = [String: RDRAudioPlayer]()
     

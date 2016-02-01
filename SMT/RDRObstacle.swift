@@ -10,7 +10,6 @@ import UIKit
 import SpriteKit
 
 class RDRObstacle: SKSpriteNode {
-    var constants = RDRConstants()
     var motions = RDRMotions()
     
     var imageName = ""

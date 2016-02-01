@@ -10,7 +10,6 @@ import UIKit
 import SpriteKit
 
 class RDRWorldGenerator: SKNode {
-    var constants = RDRConstants()
     var obstacleGenerator = RDRObstacleGenerator()
     
     var currentHiddenGroundX = CGFloat(0)
