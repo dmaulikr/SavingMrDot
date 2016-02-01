@@ -131,7 +131,6 @@ var constants = RDRConstants()
 //self.view.sendSubviewToBack(cloud)
 //button.backgroundColor = UIColor.greenColor()
 
-// MENU
 // Refine all Contacts
 // video: https://youtu.be/IfOKH5kVLGo
 // test on otehr devices
