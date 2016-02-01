@@ -129,6 +129,7 @@ var constants = RDRConstants()
 //let dot = self.childNodeWithName("dot") as! RDRDot
 //pointsLabel.removeFromParent()
 //self.view.sendSubviewToBack(cloud)
+//button.backgroundColor = UIColor.greenColor()
 
 // MENU
 // Refine all Contacts
