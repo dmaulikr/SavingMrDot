@@ -68,15 +68,6 @@
                     <view key="view" contentMode="scaleToFill" id="FJQ-fl-61f">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cN8-gh-nXN">
-                                <rect key="frame" x="513" y="507" width="30" height="30"/>
-                                <state key="normal" title="Any"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="7uP-15-uYD"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -95,15 +86,6 @@
                     <view key="view" contentMode="scaleToFill" id="osx-1C-MNB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWQ-xp-GHh">
-                                <rect key="frame" x="374" y="189" width="34" height="30"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <segue destination="9zd-3E-gGg" kind="show" id="C4d-Lc-ikx"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -130,8 +112,4 @@
             <point key="canvasLocation" x="1176" y="-105"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="7uP-15-uYD"/>
-        <segue reference="oid-0L-FNP"/>
-    </inferredMetricsTieBreakers>
 </document>
