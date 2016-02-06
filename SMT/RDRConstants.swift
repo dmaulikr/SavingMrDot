@@ -132,7 +132,9 @@ var constants = RDRConstants()
 //self.view.sendSubviewToBack(cloud)
 //button.backgroundColor = UIColor.greenColor()
 
-// second time game start (not initialize)
+// second time game start (ground not correct)
+// multiple times game crash
+// points lablel
 // Refine all Contacts (time + hero center)
 // test on otehr devices
 // difficulty

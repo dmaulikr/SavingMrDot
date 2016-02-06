@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var threshold = 0
     
-    var motions = RDRMotions()
+    let motions = RDRMotions()
     let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY", num: -1)
     let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT", num: -1)
     let touchHandler = RDRGameTouchHandler()
@@ -57,6 +57,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         dayPlayer.setVolume(constants.backgroundVolume)
         nightPlayer.setVolume(constants.backgroundVolume)
+        
+        if (!constants.musicPlayer.player.playing) {
+            constants.musicPlayer.player.play()
+        }
     }
     
     func loadScoreLabels() {
@@ -90,6 +94,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func didSimulatePhysics() {
+        if (isGameOver) {
+            return
+        }
         self.centerOnNode(dot)
         self.handlePoints()
         self.handleGeneration()
@@ -128,6 +135,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func handleGeneration() {
+        if (isGameOver) {
+            return
+        }
         self.world.enumerateChildNodesWithName("obstacle_hole_passed") { node, stop in
             if (node.position.x < self.dot.position.x - self.frame.width) {
                 node.name = "obstacle_cancelled"
@@ -158,6 +168,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func handleCleanUp() {
+        if (isGameOver) {
+            return
+        }
         self.world.enumerateChildNodesWithName("ground") { node, stop in
             if (node.position.x < self.dot.position.x - self.frame.size.width/2 - node.frame.size.width/2) {
                 node.removeFromParent()
@@ -181,6 +194,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func handleBackgroundMusic() {
+        if (isGameOver) {
+            return
+        }
         let dist = dot.position.x
         var length = CGFloat(0)
         self.world.enumerateChildNodesWithName("background") { node, stop in
@@ -204,6 +220,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func handleObstacleFire() {
+        if (isGameOver) {
+            return
+        }
         self.world.enumerateChildNodesWithName("obstacle_fire") { node, stop in
             if (node.position.x < self.dot.position.x + self.frame.width) {
                 let obstacleFire = node as! RDRObstacle
@@ -255,6 +274,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nightPlayer.stopMusic()
         dot.stop()
         ship.stop()
+        self.removeAllChildren()
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("GameOverMenu") as! RDRMenuViewController

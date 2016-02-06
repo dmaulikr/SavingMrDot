@@ -152,7 +152,6 @@ class RDROptionViewController: UIViewController {
         default:
             break
         }
-
     }
     
     func playSoundEffect(key: String) {
