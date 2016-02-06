@@ -16,6 +16,8 @@ class RDRPointsLabel: SKLabelNode {
         super.init()
         self.text = "0"
         number = 0
+        self.fontSize = 16
+        self.fontColor = constants.textColor
     }
     
     func setMyFontName(name: String) {

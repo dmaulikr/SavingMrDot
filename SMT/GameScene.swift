@@ -75,6 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bestLabel.position = CGPointMake(110, 70)
         bestLabel.text = "Best"
         bestLabel.fontSize = 16
+        bestLabel.fontColor = constants.textColor
         self.addChild(bestLabel)
         
         highScoreLabel.setMyFontName(constants.gameFont)
@@ -88,6 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let tapToBeginLabel = SKLabelNode(fontNamed: constants.gameFont)
         tapToBeginLabel.text = "tap to begin"
         tapToBeginLabel.fontSize = constants.textSize
+        tapToBeginLabel.fontColor = constants.textColor
         tapToBeginLabel.name = "tapToBeginLabel"
         self.addChild(tapToBeginLabel)
         tapToBeginLabel.runAction(motions.animateWithPulse())
@@ -287,11 +289,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let gameOverLabel = SKLabelNode(fontNamed: constants.gameFont)
         gameOverLabel.text = "Game Over"
         gameOverLabel.position = CGPointMake(0, 60)
+        gameOverLabel.fontColor = constants.textColor
         self.addChild(gameOverLabel)
         
         let tapToResetLabel = SKLabelNode(fontNamed: constants.gameFont)
         tapToResetLabel.text = "tap to reset"
-        tapToResetLabel.fontSize = 20
+        tapToResetLabel.fontSize = constants.textSize
+        tapToResetLabel.fontColor = constants.textColor
         tapToResetLabel.name = "tapToResetLabel"
         self.addChild(tapToResetLabel)
         tapToResetLabel.runAction(motions.animateWithPulse())

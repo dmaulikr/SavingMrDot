@@ -64,13 +64,14 @@ class RDRConstants {
     
     let hiddengroundHeight = CGFloat(10)
     
-    let gameFont = "Helvetica" // AmericanTypewriter-Bold
+    let gameFont = "Noteworthy-Bold" //"Helvetica" // AmericanTypewriter-Bold
     let textSize = CGFloat(20)
+    let textColor = UIColor.orangeColor()
     
-    let jumpVec = Double(10)
+    let jumpVec = Double(8.5)
     let dotSpeed = Double(150)
     let dotHorizonSpeed = Double(50)
-    let airShipSpeed = Double(120)
+    let airShipSpeed = Double(140)
     let airShipGameOverSpeed = Double(6)
     let dotFadeOutTime = Double(0.1)
     let airShipFadeOutTime = Double(0.1)
