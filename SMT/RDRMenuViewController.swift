@@ -98,11 +98,11 @@ class RDRMenuViewController: UIViewController {
         switch (tagNum) {
         case 3:
             nextViewController = storyBoard.instantiateViewControllerWithIdentifier("GameView") as! GameViewController
-            self.presentViewController(nextViewController, animated:true, completion:nil)
+            self.presentViewController(nextViewController, animated:false, completion:nil)
             break
         case 5:
             nextViewController = storyBoard.instantiateViewControllerWithIdentifier("TitleMenu") as! RDRTitleViewController
-            self.presentViewController(nextViewController, animated:true, completion:nil)
+            self.presentViewController(nextViewController, animated:false, completion:nil)
             break
         case 7:
             buttonDeactivate(sender)

@@ -103,7 +103,7 @@ class RDROptionViewController: UIViewController {
         switch (tagNum) {
         case 2:
             nextViewController = storyBoard.instantiateViewControllerWithIdentifier("TitleMenu") as! RDRTitleViewController
-            self.presentViewController(nextViewController, animated:true, completion:nil)
+            self.presentViewController(nextViewController, animated:false, completion:nil)
             break
         default:
             break
@@ -144,6 +144,7 @@ class RDROptionViewController: UIViewController {
             break
         case 4:
             constants.musicVolume = sender.value
+            constants.musicPlayer.setVolume(constants.musicVolume)
             break
         case 5:
             constants.difficulty = sender.value

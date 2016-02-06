@@ -132,8 +132,6 @@ var constants = RDRConstants()
 //self.view.sendSubviewToBack(cloud)
 //button.backgroundColor = UIColor.greenColor()
 
-// show directly (not from below)
-// music volume
 // second time game start (not initialize)
 // Refine all Contacts (time + hero center)
 // test on otehr devices

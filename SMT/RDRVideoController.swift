@@ -51,7 +51,7 @@ class RDRVideoController: UIViewController {
         player.pause()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("TitleMenu") as! RDRTitleViewController
-        self.presentViewController(nextViewController, animated:true, completion:nil)
+        self.presentViewController(nextViewController, animated:false, completion:nil)
         playSoundEffect("BUTTON_PRESS_3") // BUTTON_PRESS_1, BUTTON_PRESS_2
     }
     

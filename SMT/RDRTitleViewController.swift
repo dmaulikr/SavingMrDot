@@ -123,7 +123,7 @@ class RDRTitleViewController: UIViewController {
         switch (tagNum) {
         case 3:
             nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CharacterMenu") as! RDRCharacterViewController
-            self.presentViewController(nextViewController, animated:true, completion:nil)
+            self.presentViewController(nextViewController, animated:false, completion:nil)
             break
         case 5:
             buttonDeactivate(sender)
