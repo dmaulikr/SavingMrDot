@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import MediaPlayer
 
 class RDRConstants {
     var dotName = "JEAN" // CAPTAIN ZIPPY
@@ -131,8 +132,12 @@ var constants = RDRConstants()
 //self.view.sendSubviewToBack(cloud)
 //button.backgroundColor = UIColor.greenColor()
 
-// Refine all Contacts
+// show directly (not from below)
+// music volume
+// second time game start (not initialize)
+// Refine all Contacts (time + hero center)
 // test on otehr devices
+// difficulty
 
 // Share + Wind + Vibration + hero (bigger)
 // Ad: https://developer.apple.com/iad/monetize/
