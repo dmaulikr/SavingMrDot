@@ -68,18 +68,26 @@ class RDRWorldGenerator: SKNode {
         }
         
         var length = CGFloat(0)
-        for _ in 1...2 {
-            let background = SKSpriteNode(imageNamed: "background_" + constants.gameDN)
-            background.size.width = height / background.size.height * background.size.width
-            background.size.height = height
-            background.position = CGPointMake(currentBackGroundX - background.size.width/2, 0)
-            background.zPosition = constants.backgroundZPosition
-            background.name = "background"
-            world.addChild(background)
-            currentBackGroundX += background.frame.size.width
-            
-            length = background.size.width * 2
-        }
+        
+        let background_1 = SKSpriteNode(imageNamed: "background_" + constants.gameDN)
+        background_1.size.width = height / background_1.size.height * background_1.size.width
+        background_1.size.height = height
+        background_1.position = CGPointMake(currentBackGroundX - background_1.size.width/2, 0)
+        background_1.zPosition = constants.backgroundZPosition
+        background_1.name = "background"
+        world.addChild(background_1)
+        currentBackGroundX += background_1.frame.size.width
+        
+        let background_2 = SKSpriteNode(imageNamed: "background_" + constants.gameDN + "_trans")
+        background_2.size.width = height / background_2.size.height * background_2.size.width
+        background_2.size.height = height
+        background_2.position = CGPointMake(currentBackGroundX - background_2.size.width/2, 0)
+        background_2.zPosition = constants.backgroundZPosition
+        background_2.name = "background"
+        world.addChild(background_2)
+        currentBackGroundX += background_2.frame.size.width
+        
+        length = background_1.size.width + background_2.size.width
         
         let ground = SKSpriteNode(imageNamed: "ground_" + constants.gameDN)
         ground.size.height = length / ground.size.width * ground.size.height
