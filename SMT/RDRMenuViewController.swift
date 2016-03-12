@@ -34,7 +34,7 @@ class RDRMenuViewController: UIViewController {
         self.view.addSubview(backText)
         
         let button_back = UIButton(type: UIButtonType.System) as UIButton
-        button_back.frame = CGRectMake(30, 10, 66, 60)
+        button_back.frame = CGRectMake(30/667*width, 10/375*height, 66/667*width, 60/375*height)
         button_back.backgroundColor =  UIColor.clearColor()
         button_back.layer.cornerRadius = 0.5 * button_back.bounds.size.width
         button_back.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -55,7 +55,7 @@ class RDRMenuViewController: UIViewController {
         self.view.addSubview(scoresText)
         
         let button_scores = UIButton(type: UIButtonType.System) as UIButton
-        button_scores.frame = CGRectMake(190, 125, 66, 60)
+        button_scores.frame = CGRectMake(190/667*width, 125/375*height, 66/667*width, 60/375*height)
         button_scores.backgroundColor = UIColor.clearColor()
         button_scores.layer.cornerRadius = 0.5 * button_scores.bounds.size.width
         button_scores.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -76,7 +76,7 @@ class RDRMenuViewController: UIViewController {
         self.view.addSubview(shareText)
         
         let button_share = UIButton(type: UIButtonType.System) as UIButton
-        button_share.frame = CGRectMake(340, 125, 66, 60)
+        button_share.frame = CGRectMake(340/667*width, 125/375*height, 66/667*width, 60/375*height)
         button_share.backgroundColor = UIColor.clearColor()
         button_share.layer.cornerRadius = 0.5 * button_share.bounds.size.width
         button_share.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)

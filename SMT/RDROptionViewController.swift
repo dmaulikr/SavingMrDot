@@ -44,7 +44,7 @@ class RDROptionViewController: UIViewController {
         self.view.addSubview(backText)
         
         let button_back = UIButton(type: UIButtonType.System) as UIButton
-        button_back.frame = CGRectMake(30, 10, 66, 60)
+        button_back.frame = CGRectMake(30/667*width, 10/375*height, 66/667*width, 60/375*height)
         button_back.backgroundColor =  UIColor.clearColor()
         button_back.layer.cornerRadius = 0.5 * button_back.bounds.size.width
         button_back.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -53,7 +53,7 @@ class RDROptionViewController: UIViewController {
         button_back.tag = 2
         self.view.addSubview(button_back)
         
-        let sliderSound = UISlider(frame:CGRectMake(285, 115, 245, 20))
+        let sliderSound = UISlider(frame:CGRectMake(285/667*width, 115/375*height, 245/667*width, 20/375*height))
         sliderSound.minimumValue = 0
         sliderSound.value = constants.soundVolume
         sliderSound.maximumValue = 1
@@ -65,7 +65,7 @@ class RDROptionViewController: UIViewController {
         sliderSound.tag = 3
         self.view.addSubview(sliderSound)
         
-        let sliderMusic = UISlider(frame:CGRectMake(285, 158, 245, 20))
+        let sliderMusic = UISlider(frame:CGRectMake(285/667*width, 158/375*height, 245/667*width, 20/375*height))
         sliderMusic.minimumValue = 0
         sliderMusic.value = constants.musicVolume
         sliderMusic.maximumValue = 1
@@ -77,7 +77,7 @@ class RDROptionViewController: UIViewController {
         sliderMusic.tag = 4
         self.view.addSubview(sliderMusic)
         
-        let sliderDiff = UISlider(frame:CGRectMake(285, 203, 245, 20))
+        let sliderDiff = UISlider(frame:CGRectMake(285/667*width, 203/375*height, 245/667*width, 20/375*height))
         sliderDiff.minimumValue = 0
         sliderDiff.value = constants.difficulty
         sliderDiff.maximumValue = 1

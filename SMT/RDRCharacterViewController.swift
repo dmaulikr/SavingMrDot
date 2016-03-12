@@ -34,7 +34,7 @@ class RDRCharacterViewController: UIViewController {
         self.view.addSubview(jeanText)
         
         let button_jean = UIButton(type: UIButtonType.System) as UIButton
-        button_jean.frame = CGRectMake(245, 140, 70, 110)
+        button_jean.frame = CGRectMake(245/667*width, 140/375*height, 70/667*width, 110/375*height)
         button_jean.backgroundColor =  UIColor.clearColor()
         button_jean.layer.cornerRadius = 0.3 * button_jean.bounds.size.height
         button_jean.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -55,7 +55,7 @@ class RDRCharacterViewController: UIViewController {
         self.view.addSubview(captainText)
         
         let button_captain = UIButton(type: UIButtonType.System) as UIButton
-        button_captain.frame = CGRectMake(365, 145, 85, 130)
+        button_captain.frame = CGRectMake(365/667*width, 145/375*height, 85/667*width, 130/375*height)
         button_captain.backgroundColor = UIColor.clearColor()
         button_captain.layer.cornerRadius = 0.3 * button_captain.bounds.size.height
         button_captain.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -76,7 +76,7 @@ class RDRCharacterViewController: UIViewController {
         self.view.addSubview(zippyText)
         
         let button_zippy = UIButton(type: UIButtonType.System) as UIButton
-        button_zippy.frame = CGRectMake(470, 225, 95, 105)
+        button_zippy.frame = CGRectMake(470/667*width, 225/375*height, 95/667*width, 105/375*height)
         button_zippy.backgroundColor = UIColor.clearColor()
         button_zippy.layer.cornerRadius = 0.3 * button_zippy.bounds.size.height
         button_zippy.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
