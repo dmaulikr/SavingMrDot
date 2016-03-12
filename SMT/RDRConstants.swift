@@ -141,12 +141,10 @@ var constants = RDRConstants()
 //self.view.sendSubviewToBack(cloud)
 //button.backgroundColor = UIColor.greenColor()
 
-// gameDn (music + obstacle)
-// second time game start (ground not correct)
 // ***multiple times game crash
 // Refine all Contacts (time + hero center)
 // test on otehr devices
-// difficulty
+// ***difficulty
 
 // Share + Wind + Vibration + hero (bigger)
 // Ad: https://developer.apple.com/iad/monetize/

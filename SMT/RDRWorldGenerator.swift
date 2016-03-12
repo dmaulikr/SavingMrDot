@@ -15,13 +15,14 @@ class RDRWorldGenerator: SKNode {
     var currentHiddenGroundX = CGFloat(0)
     var currentBackGroundX = CGFloat(0)
     var currentGroundX = CGFloat(0)
+    var gameDN = "day"
     
     var world = SKNode()
     
     var width = CGFloat(0)
     var height = CGFloat(0)
     
-    var count = -1
+    var count = 0
     
     override init() {
         super.init()
@@ -58,18 +59,17 @@ class RDRWorldGenerator: SKNode {
     func generateForeBackGround() {
         if (count == 2) {
             count = 0
-            if (constants.gameDN == "day") {
-                constants.gameDN = "night"
+            if (gameDN == "day") {
+                gameDN = "night"
             } else {
-                constants.gameDN = "day"
+                gameDN = "day"
             }
-        } else {
-            count++
         }
+        count++
         
         var length = CGFloat(0)
         
-        let background_1 = SKSpriteNode(imageNamed: "background_" + constants.gameDN)
+        let background_1 = SKSpriteNode(imageNamed: "background_" + gameDN)
         background_1.size.width = height / background_1.size.height * background_1.size.width
         background_1.size.height = height
         background_1.position = CGPointMake(currentBackGroundX - background_1.size.width/2, 0)
@@ -83,7 +83,7 @@ class RDRWorldGenerator: SKNode {
             isTrans = "_trans"
         }
         
-        let background_2 = SKSpriteNode(imageNamed: "background_" + constants.gameDN + isTrans)
+        let background_2 = SKSpriteNode(imageNamed: "background_" + gameDN + isTrans)
         background_2.size.width = height / background_2.size.height * background_2.size.width
         background_2.size.height = height
         background_2.position = CGPointMake(currentBackGroundX - background_2.size.width/2, 0)
@@ -94,7 +94,7 @@ class RDRWorldGenerator: SKNode {
         
         length = background_1.size.width + background_2.size.width
         
-        let ground = SKSpriteNode(imageNamed: "ground_" + constants.gameDN)
+        let ground = SKSpriteNode(imageNamed: "ground_" + gameDN)
         ground.size.height = length / ground.size.width * ground.size.height
         ground.size.width = length
         ground.position = CGPointMake(currentGroundX, -height/2 + ground.frame.size.height/2)
@@ -104,9 +104,6 @@ class RDRWorldGenerator: SKNode {
         currentGroundX += ground.frame.size.width
         
         obstacleGenerator.setGroundWidth(length / 2)
-        //print(currentGroundX)
-        //print(currentBackGroundX)
-        print(constants.gameDN)
     }
     
     func generateObstacle(p: Int) {

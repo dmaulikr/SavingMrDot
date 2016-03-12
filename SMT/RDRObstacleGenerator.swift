@@ -40,7 +40,7 @@ class RDRObstacleGenerator {
                     currentObstacleX -= 50
                 }
             }
-            let p = (currentObstacleX - 3 * groundWidth) / (6 * groundWidth)
+            let p = (currentObstacleX - 3 * groundWidth) / (4 * groundWidth)
             if (p > CGFloat(threshold)) {
                 if (threshold % 2 == 0) {
                     constants.gameDN = "night"
