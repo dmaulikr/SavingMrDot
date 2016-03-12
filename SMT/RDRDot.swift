@@ -97,8 +97,8 @@ class RDRDot: SKSpriteNode {
     }
     
     func stop() {
-        self.removeAllActions()
         self.stopAllSoundEffect()
+        self.removeAllActions()
     }
     
     func playSoundEffect(key: String) {

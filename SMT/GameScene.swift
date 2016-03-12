@@ -17,11 +17,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var threshold = 0
     
-    let motions = RDRMotions()
-    let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY", num: -1)
-    let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT", num: -1)
-    let touchHandler = RDRGameTouchHandler()
-    let data = RDRGameData()
+    let motions = constants.motions
+    let dayPlayer = constants.dayPlayer
+    let nightPlayer = constants.nightPlayer
+    let touchHandler = constants.touchHandler
+    let data = constants.data
     
     let world = SKNode()
     let dot = RDRDot()
@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let generator = RDRWorldGenerator()
     let pointsLabel = RDRPointsLabel()
     let highScoreLabel = RDRPointsLabel()
+    let tapToResume = SKLabelNode(fontNamed: constants.gameFont)
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -37,7 +38,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMoveToView(view: SKView) {
-        data.dataInit()
+        tapToResume.text = "tap to resume"
+        tapToResume.fontSize = constants.textSize
+        tapToResume.fontColor = constants.textColor
+        tapToResume.position = CGPoint(x: frame.midX, y: frame.midY)
+        tapToResume.hidden = true
+        tapToResume.name = "tapToResumeLabel"
+        self.addChild(tapToResume)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("pauseGameScene"), name: "pauseGameScene", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("showPauseText"), name: "showPauseText", object: nil)
         
         self.addChild(world)
         generator.setMyWorld(world)
@@ -63,6 +73,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func pauseGameScene() {
+        print("pause game")
+        //self.view?.paused = true
+        self.physicsWorld.speed = 0.0
+        self.speed = 0.0
+    }
+    
+    func showPauseText() {
+        if self.physicsWorld.speed == 0.0 {
+            tapToResume.hidden = false
+        }
+    }
+    
     func loadScoreLabels() {
         pointsLabel.setMyFontName(constants.gameFont)
         pointsLabel.position = constants.pointPosition
@@ -72,7 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         data.load()
         
         let bestLabel = SKLabelNode(fontNamed: constants.gameFont)
-        bestLabel.position = CGPointMake(110, 70)
+        bestLabel.position = constants.bestPointLabelPosition
         bestLabel.text = "Best"
         bestLabel.fontSize = 16
         bestLabel.fontColor = constants.textColor
@@ -80,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         highScoreLabel.setMyFontName(constants.gameFont)
         highScoreLabel.setPoints(data.highScore)
-        highScoreLabel.position = CGPointMake(150, 70)
+        highScoreLabel.position = constants.bestPointPosition
         highScoreLabel.name = "highScoreLabel"
         self.addChild(highScoreLabel)
     }
@@ -230,6 +253,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let obstacleFire = node as! RDRObstacle
                 obstacleFire.startFire()
                 node.name = "obstacle_firing"
+            }
+        }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if self.physicsWorld.speed == 0.0 {
+            self.physicsWorld.speed = 1.0
+            self.speed = 1.0
+            if tapToResume.hidden == false {
+                tapToResume.hidden = true
             }
         }
     }

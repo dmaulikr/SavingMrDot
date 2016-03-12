@@ -21,7 +21,7 @@ class RDRWorldGenerator: SKNode {
     var width = CGFloat(0)
     var height = CGFloat(0)
     
-    var count = 0
+    var count = -1
     
     override init() {
         super.init()
@@ -78,7 +78,12 @@ class RDRWorldGenerator: SKNode {
         world.addChild(background_1)
         currentBackGroundX += background_1.frame.size.width
         
-        let background_2 = SKSpriteNode(imageNamed: "background_" + constants.gameDN + "_trans")
+        var isTrans = "";
+        if (count == 2) {
+            isTrans = "_trans"
+        }
+        
+        let background_2 = SKSpriteNode(imageNamed: "background_" + constants.gameDN + isTrans)
         background_2.size.width = height / background_2.size.height * background_2.size.width
         background_2.size.height = height
         background_2.position = CGPointMake(currentBackGroundX - background_2.size.width/2, 0)
@@ -99,8 +104,9 @@ class RDRWorldGenerator: SKNode {
         currentGroundX += ground.frame.size.width
         
         obstacleGenerator.setGroundWidth(length / 2)
-        print(currentGroundX)
-        print(currentBackGroundX)
+        //print(currentGroundX)
+        //print(currentBackGroundX)
+        print(constants.gameDN)
     }
     
     func generateObstacle(p: Int) {

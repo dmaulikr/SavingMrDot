@@ -32,7 +32,9 @@ class RDRConstants {
     
     let dotPosition = CGPointMake(0, -10)
     let airShipPosition = CGPointMake(-75, 10)
-    let pointPosition = CGPointMake(-150, 70)
+    let pointPosition = CGPointMake(150, 80)
+    let bestPointPosition = CGPointMake(150, 50)
+    let bestPointLabelPosition = CGPointMake(110, 50)
     let initObstacleX = CGFloat(200)
     
     let dotSize = CGSizeMake(25, 25)
@@ -119,9 +121,15 @@ class RDRConstants {
     ]
     
     let musicPlayer = RDRAudioPlayer(filename: "MUSIC", num: -1)
+    let motions = RDRMotions()
+    let dayPlayer = RDRAudioPlayer(filename: "BACKGROUND_DAY", num: -1)
+    let nightPlayer = RDRAudioPlayer(filename: "BACKGROUND_NIGHT", num: -1)
+    let touchHandler = RDRGameTouchHandler()
+    let data = RDRGameData()
     
     init() {
         musicPlayer.setVolume(musicVolume)
+        data.dataInit()
     }
 }
 
@@ -133,9 +141,9 @@ var constants = RDRConstants()
 //self.view.sendSubviewToBack(cloud)
 //button.backgroundColor = UIColor.greenColor()
 
+// gameDn (music + obstacle)
 // second time game start (ground not correct)
-// multiple times game crash
-// points lablel
+// ***multiple times game crash
 // Refine all Contacts (time + hero center)
 // test on otehr devices
 // difficulty
