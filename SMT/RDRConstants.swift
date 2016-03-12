@@ -32,12 +32,12 @@ class RDRConstants {
     
     let dotPosition = CGPointMake(0, -10)
     let airShipPosition = CGPointMake(-75, 10)
-    let pointPosition = CGPointMake(150, 80)
-    let bestPointPosition = CGPointMake(150, 50)
-    let bestPointLabelPosition = CGPointMake(110, 50)
-    let initObstacleX = CGFloat(200)
+    var pointPosition = CGPointMake(150, 80)
+    var bestPointPosition = CGPointMake(150, 50)
+    var bestPointLabelPosition = CGPointMake(110, 50)
+    var initObstacleX = CGFloat(200)
     
-    let dotSize = CGSizeMake(25, 25)
+    var dotSize = CGSizeMake(25, 25)
     let dotPhysicsBodyWidthRatio = CGFloat(0.56)
     let dotPhysicsBodyHeightRatio = CGFloat(0.80)
     
@@ -64,22 +64,22 @@ class RDRConstants {
     let firePhysicsBodyWidthRatio = CGFloat(0.7)
     let firePhysicsBodyHeightRatio = CGFloat(0.4)
     
-    let hiddengroundHeight = CGFloat(10)
+    var hiddengroundHeight = CGFloat(10)
     
     let gameFont = "Noteworthy-Bold" //"Helvetica" // AmericanTypewriter-Bold
-    let textSize = CGFloat(20)
+    var textSize = CGFloat(20)
     let textColor = UIColor.orangeColor()
     
     let jumpVec = Double(8.5)
     let dotSpeed = Double(150)
     let dotHorizonSpeed = Double(50)
     let airShipSpeed = Double(140)
-    let airShipGameOverSpeed = Double(6)
+    var airShipGameOverSpeed = Double(6)
     let dotFadeOutTime = Double(0.1)
     let airShipFadeOutTime = Double(0.1)
     
-    let shipInSceneCorrection = CGFloat(200)
-    let shipDotAlignCorrection = CGFloat(37)
+    var shipInSceneCorrection = CGFloat(200)
+    var shipDotAlignCorrection = CGFloat(37)
     
     let y2 = 600
     let y1 = 300
@@ -130,6 +130,22 @@ class RDRConstants {
     init() {
         musicPlayer.setVolume(musicVolume)
         data.dataInit()
+    }
+    
+    func update(width: CGFloat, height: CGFloat) {
+        pointPosition = CGPointMake(150/667*width, 80/375*height)
+        bestPointPosition = CGPointMake(150/667*width, 50/375*height)
+        bestPointLabelPosition = CGPointMake(110/667*width, 50/375*height)
+        
+        initObstacleX = CGFloat(200/667*width)
+        hiddengroundHeight = CGFloat(10/375*height)
+        
+        textSize = CGFloat(20)
+
+        airShipGameOverSpeed = Double(6/667*width)
+        
+        shipInSceneCorrection = CGFloat(200/667*width)
+        shipDotAlignCorrection = CGFloat(37/667*width)
     }
 }
 
