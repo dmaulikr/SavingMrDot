@@ -51,7 +51,7 @@ class RDRDot: SKSpriteNode {
     
     func land() {
         self.removeAllActions()
-        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-down", frames: constants.motionMap["Jump-down"]!))
+        self.runAction(motions.playGifForOnce("DOT_" + constants.dotName + "_Jump-down", frames: constants.motionMap["Jump-down"]!, time: 0.25))
         self.playSoundEffect("DOT_JUMP_DOWN")
         self.runRight()
         isJumping = false
@@ -60,7 +60,7 @@ class RDRDot: SKSpriteNode {
     func burn() {
         self.playSoundEffect("DOT_FALL")
         self.runAction(SKAction.sequence([
-            motions.playGifForOnce("DOT_" + constants.dotName + "_Burn", frames: constants.motionMap["Burn"]!),
+            motions.playGifForOnce("DOT_" + constants.dotName + "_Burn", frames: constants.motionMap["Burn"]!, time: 2.5),
             SKAction.fadeOutWithDuration(constants.dotFadeOutTime)
             ]))
     }
@@ -68,7 +68,7 @@ class RDRDot: SKSpriteNode {
     func fall() {
         self.playSoundEffect("DOT_FALL")
         self.runAction(SKAction.sequence([
-            motions.playGifForOnce("DOT_" + constants.dotName + "_Fall", frames: constants.motionMap["Fall"]!),
+            motions.playGifForOnce("DOT_" + constants.dotName + "_Fall", frames: constants.motionMap["Fall"]!, time: 2),
             SKAction.fadeOutWithDuration(constants.dotFadeOutTime)
             ]))
     }
@@ -81,8 +81,8 @@ class RDRDot: SKSpriteNode {
             self.playSoundEffect("DOT_HURT_AH")
         }
         self.runAction(SKAction.sequence([
-            motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!),
-            motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!),
+            motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-before", frames: constants.motionMap["Hurt-before"]!, time: 0.5),
+            motions.playGifForOnce("DOT_" + constants.dotName + "_Hurt-after", frames: constants.motionMap["Hurt-after"]!, time: 2.5),
             SKAction.fadeOutWithDuration(constants.dotFadeOutTime)
             ]))
     }

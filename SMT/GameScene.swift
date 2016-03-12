@@ -230,7 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (dist < 3 * length) {
             dayPlayer.playMusic()
         } else {
-            let p = (dist - 3 * length) / (6 * length)
+            let p = (dist - 3 * length) / (4 * length)
             if (p > CGFloat(threshold)) {
                 if (threshold % 2 == 0) {
                     dayPlayer.pauseMusic()

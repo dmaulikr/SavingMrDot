@@ -90,9 +90,9 @@ class RDRObstacle: SKSpriteNode {
     
     func startFire() {
         self.runAction(SKAction.sequence(
-            [motions.playGifForOnce("FIRE_" + gameDN.uppercaseString + "_BEGIN", frames: constants.motionMap["FIRE-BEGIN"]!),
-             motions.playGifForOnce("FIRE_" + gameDN.uppercaseString + "_DURING", frames: constants.motionMap["FIRE-DURING"]!),
-             motions.playGifForOnce("FIRE_" + gameDN.uppercaseString + "_END", frames: constants.motionMap["FIRE-END"]!) ]))
+            [motions.playGifForOnce("FIRE_" + gameDN.uppercaseString + "_BEGIN", frames: constants.motionMap["FIRE-BEGIN"]!, time: 3.5),
+             motions.playGifForOnce("FIRE_" + gameDN.uppercaseString + "_DURING", frames: constants.motionMap["FIRE-DURING"]!, time: 2),
+             motions.playGifForOnce("FIRE_" + gameDN.uppercaseString + "_END", frames: constants.motionMap["FIRE-END"]!, time: 3.5) ]))
     }
 
     required init?(coder aDecoder: NSCoder) {

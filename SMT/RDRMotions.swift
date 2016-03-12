@@ -34,12 +34,13 @@ class RDRMotions {
         return SKAction.repeatActionForever(SKAction.animateWithTextures(gifTextures, timePerFrame: 0.125))
     }
     
-    func playGifForOnce(fileName: String, frames: Int) -> SKAction {
+    func playGifForOnce(fileName: String, frames: Int, time: Double) -> SKAction {
         var gifTextures: [SKTexture] = []
         for i in 0...frames {
             gifTextures.append(SKTexture(imageNamed: fileName + "-\(i)"))
         }
-        return SKAction.animateWithTextures(gifTextures, timePerFrame: 0.250)
+        let timePF = time/Double(frames)
+        return SKAction.animateWithTextures(gifTextures, timePerFrame: timePF)
     }
     
     func playGifFromPNG(fileName: String, time: Double) -> SKAction {
