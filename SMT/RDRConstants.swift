@@ -142,8 +142,6 @@ var constants = RDRConstants()
 //button.backgroundColor = UIColor.greenColor()
 
 // ***multiple times game crash
-// Refine all Contacts (time + hero center)
-// test on otehr devices
 // ***difficulty
 
 // Share + Wind + Vibration + hero (bigger)

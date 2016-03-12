@@ -39,8 +39,11 @@ class RDRTitleViewController: UIViewController {
         playText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(playText)
         
+        let r = 300/1800*height
+        let h = 600/1800*height
+        
         let button_play = UIButton(type: UIButtonType.System) as UIButton
-        button_play.frame = CGRectMake(190, 125, 66, 60)
+        button_play.frame = CGRectMake(820/2850*width, h, r, r)
         button_play.backgroundColor =  UIColor.clearColor()
         button_play.layer.cornerRadius = 0.5 * button_play.bounds.size.width
         button_play.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -61,7 +64,7 @@ class RDRTitleViewController: UIViewController {
         self.view.addSubview(duelText)
         
         let button_duel = UIButton(type: UIButtonType.System) as UIButton
-        button_duel.frame = CGRectMake(295, 125, 66, 60)
+        button_duel.frame = CGRectMake(1250/2850*width, h, r, r)
         button_duel.backgroundColor = UIColor.clearColor()
         button_duel.layer.cornerRadius = 0.5 * button_duel.bounds.size.width
         button_duel.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -82,7 +85,7 @@ class RDRTitleViewController: UIViewController {
         self.view.addSubview(optionText)
         
         let button_opt = UIButton(type: UIButtonType.System) as UIButton
-        button_opt.frame = CGRectMake(400, 125, 66, 60)
+        button_opt.frame = CGRectMake(1720/2850*width, h, r, r)
         button_opt.backgroundColor = UIColor.clearColor()
         button_opt.layer.cornerRadius = 0.5 * button_opt.bounds.size.width
         button_opt.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
