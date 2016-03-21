@@ -14,7 +14,8 @@ class RDRCharacterViewController: UIViewController {
     
     func addBackground() {
         let width = UIScreen.mainScreen().bounds.size.width
-        let height = UIScreen.mainScreen().bounds.size.height
+        //let height = UIScreen.mainScreen().bounds.size.height
+        let height = width / 16 * 9
         
         let background = UIImageView(frame: CGRectMake(0, 0, width, height))
         background.image = UIImage(named: "CHARACTER_SCREEN_FARM")

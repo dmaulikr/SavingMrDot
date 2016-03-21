@@ -13,28 +13,37 @@ class RDRTitleViewController: UIViewController {
     var soundEffects = [String: RDRAudioPlayer]()
     
     func addBackground() {
-        let width = UIScreen.mainScreen().bounds.size.width
-        let height = UIScreen.mainScreen().bounds.size.height
+        var width = UIScreen.mainScreen().bounds.size.width
+        var height = UIScreen.mainScreen().bounds.size.height
         
-        let background = UIImageView(frame: CGRectMake(0, 0, width, height))
+        var offset_x = CGFloat(0)
+        var offset_y = CGFloat(0)
+        if (height > width) {
+            offset_x = width/2 - 667/2
+            offset_y = height/2 - 375.1875/2
+            width = 667
+            height = 375.1875
+        }
+        
+        let background = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         background.image = UIImage(named: "TITLE_SCREEN_FARM")
         background.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
         
-        let cloud = UIImageView(frame: CGRectMake(-800, 0, width, height))
+        let cloud = UIImageView(frame: CGRectMake(-800+offset_x, 0+offset_y, width, height))
         cloud.image = UIImage(named: "TITLE_SCREEN_CLOUDS")
         cloud.contentMode = UIViewContentMode.ScaleAspectFill
         cloud.tag = 1
         self.view.addSubview(cloud)
         
-        let playImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let playImg = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         playImg.image = UIImage(named: "TITLE_SCREEN_BUTTON_PLAY_NORMAL")
         playImg.contentMode = UIViewContentMode.ScaleAspectFill
         playImg.tag = 2
         self.view.addSubview(playImg)
         
-        let playText = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let playText = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         playText.image = UIImage(named: "TITLE_SCREEN_BUTTON_PLAY_TEXT")
         playText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(playText)
@@ -43,7 +52,7 @@ class RDRTitleViewController: UIViewController {
         let h = 600/1800*height
         
         let button_play = UIButton(type: UIButtonType.System) as UIButton
-        button_play.frame = CGRectMake(820/2850*width, h, r, r)
+        button_play.frame = CGRectMake(820/2850*width+offset_x, h+offset_y, r, r)
         button_play.backgroundColor =  UIColor.clearColor()
         button_play.layer.cornerRadius = 0.5 * button_play.bounds.size.width
         button_play.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -52,19 +61,19 @@ class RDRTitleViewController: UIViewController {
         button_play.tag = 3
         self.view.addSubview(button_play)
         
-        let duelImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let duelImg = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         duelImg.image = UIImage(named: "TITLE_SCREEN_BUTTON_DUEL_NORMAL")
         duelImg.contentMode = UIViewContentMode.ScaleAspectFill
         duelImg.tag = 4
         self.view.addSubview(duelImg)
         
-        let duelText = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let duelText = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         duelText.image = UIImage(named: "TITLE_SCREEN_BUTTON_DUEL_TEXT")
         duelText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(duelText)
         
         let button_duel = UIButton(type: UIButtonType.System) as UIButton
-        button_duel.frame = CGRectMake(1250/2850*width, h, r, r)
+        button_duel.frame = CGRectMake(1250/2850*width+offset_x, h+offset_y, r, r)
         button_duel.backgroundColor = UIColor.clearColor()
         button_duel.layer.cornerRadius = 0.5 * button_duel.bounds.size.width
         button_duel.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -73,19 +82,19 @@ class RDRTitleViewController: UIViewController {
         button_duel.tag = 5
         self.view.addSubview(button_duel)
         
-        let optionImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let optionImg = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         optionImg.image = UIImage(named: "TITLE_SCREEN_BUTTON_OPTIONS_NORMAL")
         optionImg.contentMode = UIViewContentMode.ScaleAspectFill
         optionImg.tag = 6
         self.view.addSubview(optionImg)
         
-        let optionText = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let optionText = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         optionText.image = UIImage(named: "TITLE_SCREEN_BUTTON_OPTIONS_TEXT")
         optionText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(optionText)
         
         let button_opt = UIButton(type: UIButtonType.System) as UIButton
-        button_opt.frame = CGRectMake(1720/2850*width, h, r, r)
+        button_opt.frame = CGRectMake(1720/2850*width+offset_x, h+offset_y, r, r)
         button_opt.backgroundColor = UIColor.clearColor()
         button_opt.layer.cornerRadius = 0.5 * button_opt.bounds.size.width
         button_opt.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)

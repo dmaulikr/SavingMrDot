@@ -30,7 +30,12 @@ class RDRVideoController: UIViewController {
         
         let button_skip = UIButton(type: UIButtonType.System) as UIButton
         
-        button_skip.frame = CGRectMake(self.view.frame.width-50, 10, 32, 32)
+        var h = CGFloat(10)
+        if (self.view.bounds.height > self.view.bounds.width) {
+            h = CGFloat(310)
+        }
+        
+        button_skip.frame = CGRectMake(self.view.frame.width-50, h, 32, 32)
         button_skip.setBackgroundImage(UIImage(named: "SKIP"), forState: UIControlState.Normal)
         button_skip.layer.cornerRadius = 0.5 * button_skip.bounds.size.width
         button_skip.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)

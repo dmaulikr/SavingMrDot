@@ -33,8 +33,16 @@ class RDRWorldGenerator: SKNode {
     }
     
     func populate() {
+        //768 432
+        // screen is 16*9
         width = self.scene!.size.width
         height = width / 16 * 9
+        
+        // screen is 4*3
+        if (self.scene!.size.width/self.scene!.size.height > 1) {
+            width = 375 //self.scene!.size.height
+            height = width / 16 * 9
+        }
 
         obstacleGenerator.setScreenHeight(height)
         for _ in 1...3 {

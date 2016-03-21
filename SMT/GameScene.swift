@@ -38,7 +38,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMoveToView(view: SKView) {
-        constants.update(self.frame.height, height: self.frame.width)
+        if (self.frame.width/self.frame.height < 1) {
+            constants.update(self.frame.height, height: self.frame.width)
+        } else {
+            constants.update(375/9*16, height: 375)
+        }
         
         tapToResume.text = "tap to resume"
         tapToResume.fontSize = constants.textSize
