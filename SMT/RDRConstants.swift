@@ -157,7 +157,6 @@ var constants = RDRConstants()
 //self.view.sendSubviewToBack(cloud)
 //button.backgroundColor = UIColor.greenColor()
 
-// ***multiple times game crash
 // ***difficulty
 
 // Share + Wind + Vibration + hero (bigger)

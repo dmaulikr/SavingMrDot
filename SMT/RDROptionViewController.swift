@@ -13,39 +13,51 @@ class RDROptionViewController: UIViewController {
     var soundEffects = [String: RDRAudioPlayer]()
     
     func addBackground() {
-        let width = UIScreen.mainScreen().bounds.size.width
-        //let height = UIScreen.mainScreen().bounds.size.height
-        let height = width / 16 * 9
+        var width = UIScreen.mainScreen().bounds.size.width
+        var height = UIScreen.mainScreen().bounds.size.height
         
-        let background = UIImageView(frame: CGRectMake(0, 0, width, height))
+        var offset_x = CGFloat(0)
+        var offset_y = CGFloat(0)
+        if (height > width) {
+            offset_x = width/2 - 667/2
+            offset_y = height/2 - 375.1875/2
+            width = 667
+            height = 375.1875
+        }
+        
+        //let width = UIScreen.mainScreen().bounds.size.width
+        //let height = UIScreen.mainScreen().bounds.size.height
+        //let height = width / 16 * 9
+        
+        let background = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         background.image = UIImage(named: "OPTIONS_SCREEN_BACKGROUND")
         background.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
         
-        let sliders = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let sliders = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         sliders.image = UIImage(named: "OPTIONS_SCREEN_SLIDERS")
         sliders.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(sliders)
         
-        let text = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let text = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         text.image = UIImage(named: "OPTIONS_SCREEN_TEXT")
         text.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(text)
         
-        let backImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let backImg = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         backImg.image = UIImage(named: "OPTIONS_SCREEN_BUTTON_BACK_NORMAL")
         backImg.contentMode = UIViewContentMode.ScaleAspectFill
         backImg.tag = 1
         self.view.addSubview(backImg)
         
-        let backText = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let backText = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         backText.image = UIImage(named: "OPTIONS_SCREEN_BUTTON_BACK_TEXT")
         backText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(backText)
         
         let button_back = UIButton(type: UIButtonType.System) as UIButton
-        button_back.frame = CGRectMake(30/667*width, 10/375*height, 66/667*width, 60/375*height)
+        button_back.frame = CGRectMake(30/667*width+offset_x, 10/375*height+offset_y, 66/667*width, 60/375*height)
         button_back.backgroundColor =  UIColor.clearColor()
         button_back.layer.cornerRadius = 0.5 * button_back.bounds.size.width
         button_back.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -54,7 +66,7 @@ class RDROptionViewController: UIViewController {
         button_back.tag = 2
         self.view.addSubview(button_back)
         
-        let sliderSound = UISlider(frame:CGRectMake(285/667*width, 115/375*height, 245/667*width, 20/375*height))
+        let sliderSound = UISlider(frame:CGRectMake(285/667*width+offset_x, 115/375*height+offset_y, 245/667*width, 20/375*height))
         sliderSound.minimumValue = 0
         sliderSound.value = constants.soundVolume
         sliderSound.maximumValue = 1
@@ -66,7 +78,7 @@ class RDROptionViewController: UIViewController {
         sliderSound.tag = 3
         self.view.addSubview(sliderSound)
         
-        let sliderMusic = UISlider(frame:CGRectMake(285/667*width, 158/375*height, 245/667*width, 20/375*height))
+        let sliderMusic = UISlider(frame:CGRectMake(285/667*width+offset_x, 158/375*height+offset_y, 245/667*width, 20/375*height))
         sliderMusic.minimumValue = 0
         sliderMusic.value = constants.musicVolume
         sliderMusic.maximumValue = 1
@@ -78,7 +90,7 @@ class RDROptionViewController: UIViewController {
         sliderMusic.tag = 4
         self.view.addSubview(sliderMusic)
         
-        let sliderDiff = UISlider(frame:CGRectMake(285/667*width, 203/375*height, 245/667*width, 20/375*height))
+        let sliderDiff = UISlider(frame:CGRectMake(285/667*width+offset_x, 203/375*height+offset_y, 245/667*width, 20/375*height))
         sliderDiff.minimumValue = 0
         sliderDiff.value = constants.difficulty
         sliderDiff.maximumValue = 1

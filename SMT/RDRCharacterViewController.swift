@@ -13,29 +13,41 @@ class RDRCharacterViewController: UIViewController {
     var soundEffects = [String: RDRAudioPlayer]()
     
     func addBackground() {
-        let width = UIScreen.mainScreen().bounds.size.width
+        //let width = UIScreen.mainScreen().bounds.size.width
         //let height = UIScreen.mainScreen().bounds.size.height
-        let height = width / 16 * 9
+        //let height = width / 16 * 9
         
-        let background = UIImageView(frame: CGRectMake(0, 0, width, height))
+        var width = UIScreen.mainScreen().bounds.size.width
+        var height = UIScreen.mainScreen().bounds.size.height
+        
+        var offset_x = CGFloat(0)
+        var offset_y = CGFloat(0)
+        if (height > width) {
+            offset_x = width/2 - 667/2
+            offset_y = height/2 - 375.1875/2
+            width = 667
+            height = 375.1875
+        }
+        
+        let background = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         background.image = UIImage(named: "CHARACTER_SCREEN_FARM")
         background.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
         
-        let jeanImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let jeanImg = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         jeanImg.image = UIImage(named: "CHARACTER_SCREEN_BUTTON_JEAN_NORMAL")
         jeanImg.contentMode = UIViewContentMode.ScaleAspectFill
         jeanImg.tag = 2
         self.view.addSubview(jeanImg)
         
-        let jeanText = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let jeanText = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         jeanText.image = UIImage(named: "CHARACTER_SCREEN_BUTTON_JEAN_TEXT")
         jeanText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(jeanText)
         
         let button_jean = UIButton(type: UIButtonType.System) as UIButton
-        button_jean.frame = CGRectMake(245/667*width, 140/375*height, 70/667*width, 110/375*height)
+        button_jean.frame = CGRectMake(245/667*width+offset_x, 140/375*height+offset_y, 70/667*width, 110/375*height)
         button_jean.backgroundColor =  UIColor.clearColor()
         button_jean.layer.cornerRadius = 0.3 * button_jean.bounds.size.height
         button_jean.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -44,19 +56,19 @@ class RDRCharacterViewController: UIViewController {
         button_jean.tag = 3
         self.view.addSubview(button_jean)
         
-        let captainImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let captainImg = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         captainImg.image = UIImage(named: "CHARACTER_SCREEN_BUTTON_CAPTAIN_NORMAL")
         captainImg.contentMode = UIViewContentMode.ScaleAspectFill
         captainImg.tag = 4
         self.view.addSubview(captainImg)
         
-        let captainText = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let captainText = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         captainText.image = UIImage(named: "CHARACTER_SCREEN_BUTTON_CAPTAIN_TEXT")
         captainText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(captainText)
         
         let button_captain = UIButton(type: UIButtonType.System) as UIButton
-        button_captain.frame = CGRectMake(365/667*width, 145/375*height, 85/667*width, 130/375*height)
+        button_captain.frame = CGRectMake(365/667*width+offset_x, 145/375*height+offset_y, 85/667*width, 130/375*height)
         button_captain.backgroundColor = UIColor.clearColor()
         button_captain.layer.cornerRadius = 0.3 * button_captain.bounds.size.height
         button_captain.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -65,19 +77,19 @@ class RDRCharacterViewController: UIViewController {
         button_captain.tag = 5
         self.view.addSubview(button_captain)
         
-        let zippyImg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let zippyImg = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         zippyImg.image = UIImage(named: "CHARACTER_SCREEN_BUTTON_ZIPPY_NORMAL")
         zippyImg.contentMode = UIViewContentMode.ScaleAspectFill
         zippyImg.tag = 6
         self.view.addSubview(zippyImg)
         
-        let zippyText = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let zippyText = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         zippyText.image = UIImage(named: "CHARACTER_SCREEN_BUTTON_ZIPPY_TEXT")
         zippyText.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(zippyText)
         
         let button_zippy = UIButton(type: UIButtonType.System) as UIButton
-        button_zippy.frame = CGRectMake(470/667*width, 225/375*height, 95/667*width, 105/375*height)
+        button_zippy.frame = CGRectMake(470/667*width+offset_x, 225/375*height+offset_y, 95/667*width, 105/375*height)
         button_zippy.backgroundColor = UIColor.clearColor()
         button_zippy.layer.cornerRadius = 0.3 * button_zippy.bounds.size.height
         button_zippy.addTarget(self, action: "buttonTransit:", forControlEvents: UIControlEvents.TouchUpInside)

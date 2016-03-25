@@ -17,11 +17,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var threshold = 0
     
-    let motions = constants.motions
-    let dayPlayer = constants.dayPlayer
-    let nightPlayer = constants.nightPlayer
-    let touchHandler = constants.touchHandler
-    let data = constants.data
+    //let motions = constants.motions
+    //let dayPlayer = constants.dayPlayer
+    //let nightPlayer = constants.nightPlayer
+    //let touchHandler = constants.touchHandler
+    //let data = constants.data
     
     let world = SKNode()
     let dot = RDRDot()
@@ -71,8 +71,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.loadTapToBeginLabel()
         
-        dayPlayer.setVolume(constants.backgroundVolume)
-        nightPlayer.setVolume(constants.backgroundVolume)
+        constants.dayPlayer.setVolume(constants.backgroundVolume)
+        constants.nightPlayer.setVolume(constants.backgroundVolume)
         
         if (!constants.musicPlayer.player.playing) {
             constants.musicPlayer.player.play()
@@ -98,7 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pointsLabel.name = "pointsLabel"
         self.addChild(pointsLabel)
         
-        data.load()
+        constants.data.load()
         
         let bestLabel = SKLabelNode(fontNamed: constants.gameFont)
         bestLabel.position = constants.bestPointLabelPosition
@@ -108,7 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(bestLabel)
         
         highScoreLabel.setMyFontName(constants.gameFont)
-        highScoreLabel.setPoints(data.highScore)
+        highScoreLabel.setPoints(constants.data.highScore)
         highScoreLabel.position = constants.bestPointPosition
         highScoreLabel.name = "highScoreLabel"
         self.addChild(highScoreLabel)
@@ -121,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToBeginLabel.fontColor = constants.textColor
         tapToBeginLabel.name = "tapToBeginLabel"
         self.addChild(tapToBeginLabel)
-        tapToBeginLabel.runAction(motions.animateWithPulse())
+        tapToBeginLabel.runAction(constants.motions.animateWithPulse())
     }
 
     override func didSimulatePhysics() {
@@ -234,16 +234,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             length = node.frame.size.width
         }
         if (dist < 3 * length) {
-            dayPlayer.playMusic()
+            constants.dayPlayer.playMusic()
         } else {
             let p = (dist - 3 * length) / (4 * length)
             if (p > CGFloat(threshold)) {
                 if (threshold % 2 == 0) {
-                    dayPlayer.pauseMusic()
-                    nightPlayer.playMusic()
+                    constants.dayPlayer.pauseMusic()
+                    constants.nightPlayer.playMusic()
                 } else {
-                    nightPlayer.pauseMusic()
-                    dayPlayer.playMusic()
+                    constants.nightPlayer.pauseMusic()
+                    constants.dayPlayer.playMusic()
                 }
                 threshold++
             }
@@ -276,7 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch in touches {
             let t = RDRGameTouch(loc: touch.locationInNode(self), t: touch.timestamp)
-            touchHandler.addTouch(t)
+            constants.touchHandler.addTouch(t)
         }
     }
     
@@ -291,7 +291,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else {
                 for touch in touches {
                     let t = RDRGameTouch(loc: touch.locationInNode(self), t: touch.timestamp)
-                    let jumpRatio = touchHandler.computeLine(t)
+                    let jumpRatio = constants.touchHandler.computeLine(t)
                     print("Ratio" + jumpRatio.description)
                     if (jumpRatio != 1) {
                         dot.jump(jumpRatio)
@@ -311,11 +311,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func clear() {
         self.updateHighScore()
         constants.musicPlayer.stopMusic()
-        dayPlayer.stopMusic()
-        nightPlayer.stopMusic()
+        constants.dayPlayer.stopMusic()
+        constants.nightPlayer.stopMusic()
         dot.stop()
         ship.stop()
+        dot.removeAllChildren()
+        ship.removeAllChildren()
+        generator.removeAllChildren()
+        world.removeAllChildren()
+        
         self.removeAllChildren()
+        self.removeFromParent()
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("GameOverMenu") as! RDRMenuViewController
@@ -337,13 +343,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToResetLabel.fontColor = constants.textColor
         tapToResetLabel.name = "tapToResetLabel"
         self.addChild(tapToResetLabel)
-        tapToResetLabel.runAction(motions.animateWithPulse())
+        tapToResetLabel.runAction(constants.motions.animateWithPulse())
         
         self.updateHighScore()
         
         constants.musicPlayer.stopMusic()
-        dayPlayer.stopMusic()
-        nightPlayer.stopMusic()
+        constants.dayPlayer.stopMusic()
+        constants.nightPlayer.stopMusic()
     }
     
     func updateHighScore() {
@@ -351,8 +357,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let highestPointLabel = self.childNodeWithName("highScoreLabel") as! RDRPointsLabel
         if (currentPointLabel.number > highestPointLabel.number) {
             highestPointLabel.setPoints(currentPointLabel.number)
-            data.highScore = currentPointLabel.number
-            data.save()
+            constants.data.highScore = currentPointLabel.number
+            constants.data.save()
         }
     }
     
