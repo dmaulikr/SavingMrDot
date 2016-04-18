@@ -17,12 +17,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var threshold = 0
     
-    //let motions = constants.motions
-    //let dayPlayer = constants.dayPlayer
-    //let nightPlayer = constants.nightPlayer
-    //let touchHandler = constants.touchHandler
-    //let data = constants.data
-    
     let world = SKNode()
     let dot = RDRDot()
     let ship = RDRAirShip()
@@ -315,11 +309,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         constants.nightPlayer.stopMusic()
         dot.stop()
         ship.stop()
-        dot.removeAllChildren()
-        ship.removeAllChildren()
-        generator.removeAllChildren()
-        world.removeAllChildren()
+        //dot.removeAllChildren()
+        //ship.removeAllChildren()
+        //generator.removeAllChildren()
+        //world.removeAllChildren()
         
+        self.removeAllActions()
         self.removeAllChildren()
         self.removeFromParent()
         

@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class RDRDot: SKSpriteNode {
-    var motions = RDRMotions()
+    var motions = constants.motions
     var isJumping = false
     var soundEffects = [String: RDRAudioPlayer]()
     
