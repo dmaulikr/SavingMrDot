@@ -102,7 +102,7 @@ class RDRWorldGenerator: SKNode {
         
         length = background_1.size.width + background_2.size.width
         
-        let ground = SKSpriteNode(imageNamed: "ground_" + gameDN)
+        let ground = SKSpriteNode(imageNamed: "ground_" + gameDN + isTrans)
         ground.size.height = length / ground.size.width * ground.size.height
         ground.size.width = length
         ground.position = CGPointMake(currentGroundX, -height/2 + ground.frame.size.height/2)
