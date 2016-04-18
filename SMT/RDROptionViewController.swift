@@ -25,15 +25,23 @@ class RDROptionViewController: UIViewController {
             height = 375.1875
         }
         
-        //let width = UIScreen.mainScreen().bounds.size.width
-        //let height = UIScreen.mainScreen().bounds.size.height
-        //let height = width / 16 * 9
+        let sky = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
+        sky.image = UIImage(named: "SCREEN_SKY")
+        sky.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.addSubview(sky)
         
         let background = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         background.image = UIImage(named: "OPTIONS_SCREEN_BACKGROUND")
         background.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
+        self.view.sendSubviewToBack(sky)
+        
+        let cloud = UIImageView(frame: CGRectMake(-800+offset_x, 0+offset_y, width, height))
+        cloud.image = UIImage(named: "SCREEN_CLOUDS")
+        cloud.contentMode = UIViewContentMode.ScaleAspectFill
+        cloud.tag = 6
+        self.view.addSubview(cloud)
         
         let sliders = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         sliders.image = UIImage(named: "OPTIONS_SCREEN_SLIDERS")
@@ -107,6 +115,24 @@ class RDROptionViewController: UIViewController {
         super.viewDidLoad()
         self.addBackground()
         constants.musicPlayer.playMusic()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        moveImage(view.viewWithTag(6) as! UIImageView)
+    }
+    
+    func moveImage(view: UIImageView){
+        let toPoint: CGPoint = CGPointMake(1600.0, 0.0)
+        let fromPoint : CGPoint = CGPointMake(0.0, 0.0)
+        
+        let movement = CABasicAnimation(keyPath: "position")
+        movement.additive = true
+        movement.fromValue =  NSValue(CGPoint: fromPoint)
+        movement.toValue =  NSValue(CGPoint: toPoint)
+        movement.repeatCount = Float.infinity
+        movement.duration = 20
+        view.layer.addAnimation(movement, forKey: "move")
     }
     
     func buttonTransit(sender: UIButton!) {

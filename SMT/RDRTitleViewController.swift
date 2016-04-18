@@ -25,14 +25,20 @@ class RDRTitleViewController: UIViewController {
             height = 375.1875
         }
         
+        let sky = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
+        sky.image = UIImage(named: "SCREEN_SKY")
+        sky.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.addSubview(sky)
+        
         let background = UIImageView(frame: CGRectMake(0+offset_x, 0+offset_y, width, height))
         background.image = UIImage(named: "TITLE_SCREEN_FARM")
         background.contentMode = UIViewContentMode.ScaleAspectFill
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
+        self.view.sendSubviewToBack(sky)
         
         let cloud = UIImageView(frame: CGRectMake(-800+offset_x, 0+offset_y, width, height))
-        cloud.image = UIImage(named: "TITLE_SCREEN_CLOUDS")
+        cloud.image = UIImage(named: "SCREEN_CLOUDS")
         cloud.contentMode = UIViewContentMode.ScaleAspectFill
         cloud.tag = 1
         self.view.addSubview(cloud)
